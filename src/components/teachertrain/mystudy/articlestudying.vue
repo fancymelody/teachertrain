@@ -2,31 +2,55 @@
     <div class="articlestudying">
         <div class="tab">
             <ul class="tabitemlist">
-                <li class="item coursestudying" id="coursestudying">
+                <li class="item coursestudying">
                     <a class="tabword">
-                        <router-link to="/teachertrain/acticlestudying">待阅读</router-link>
+                        <router-link to="/teachertrain/acticletudying">待阅读</router-link>
                     </a>
                 </li>
-                <li class="item coursestudied" id="coursestudied">
+                <li class="item coursestudied">
                     <a class="tabword">
                         <router-link to="/teachertrain/acticlestudied">已阅读</router-link>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="articlemain">
-            <div class="articleitem">
+        <div class="acticlecontent">
+            <div class="left">
+                <div class="articlemain">
+                    <div class="articleitem">
+                        <div class="articleitemdetail">
+                            <div class="title">
+                                <h2>
+                                    <a href="" target="_blank" style="color:#000;" class="titleword">
+                                        <span>{{title}}</span>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div class="abstract">
+                                青少年的心理特点有别于成年人,其心理发展中存在着几对矛盾:自我意识与社会角色的矛盾,理想我与现实我的矛盾
+                            </div>
+                            <div class="btnbox">
+                                <img <button class="btn"><span>开始阅读</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="articleitem">
+                        <div class="articleitemdetail">
 
-            </div>
-            <div class="articleitem">
+                        </div>
+                    </div>
+                    <div class="articleitem">
+                        <div class="articleitemdetail">
 
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="articleitem">
-
+            <div class="right">
+                <div class="recommend">
+                    ffff ddddddddddddddddddddddddddddddddddddddddddddddd
+                </div>
             </div>
-        </div>
-        <div class="recommend">
-            ffff  ddddddddddddddddddddddddddddddddddddddddddddddd
         </div>
     </div>
 </template>
@@ -36,11 +60,13 @@
         name: 'articlestudying',
         data() {
             return {
+                title: "浅谈青少年的心理特征与心理健康教育",
+                abstract: "青少年的心理特点有别于成年人,其心理发展中存在着几对矛盾:自我意识与社会角色的矛盾,理想我与现实我的矛盾",
+                imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
                 articles: [
                     {
-                        progressvalue: 82.4,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        name: "人文科技艺术专题",
+                        title: "浅谈青少年的心理特征与心理健康教育",
+                        abstract: "青少年的心理特点有别于成年人,其心理发展中存在着几对矛盾:自我意识与社会角色的矛盾,理想我与现实我的矛盾",
                     },
                     {
                         progressvalue: 82.4,
@@ -106,12 +132,12 @@
         padding: 8px 25px 0;
         margin-bottom: 10px;
         height: 52px;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
     }
 
     .tabitemlist {
         float: left;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
     }
 
     .item {
@@ -123,7 +149,7 @@
         line-height: 32px;
         font-weight: bold;
         list-style: none;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
     }
 
     a {
@@ -135,6 +161,25 @@
         background: #958ba8;
     }
 
+    .acticlecontent {
+        height: 100%;
+        width: 100%;
+    }
+
+    .left {
+        float: left;
+        width: 80%;
+        height: 100%;
+        /* background: rgb(238, 134, 134); */
+    }
+
+    .right {
+        float: right;
+        width: 20%;
+        height: 100%;
+        background: rgb(133, 207, 133);
+    }
+
     .articlemain {
         display: flex;
         flex-direction: row;
@@ -143,25 +188,39 @@
     }
 
     .articleitem {
-        /* width: 80%;
-        height: 150px;
-        display: flex; */
-        display:inline;
-        /* width:80%; */
-        /* flex-direction: column;
-        align-items: center;
-        background: #fff; */
-        border: 1px solid #000;
-    }
-
-    .recommend {
-        display:inline;
-        /* width: 20%;
+        padding: 10px 10px;
+        width: 100%;
         height: 150px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        background: #fff; */
-        border: 1px solid red;
+        margin: 0px 5px;
+        border: 1px solid rgb(241, 6, 6);
+        background: #fff;
+        /* border-bottom: 1px solid #f4f4f4; */
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .articleitemdetail {
+        border: 1px solid slateblue;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 24px;
+        height: 24px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .titleword span:hover {
+        color: red;
+    }
+
+    .abstract {
+        margin-bottom: 4px;
+        color: #8a8a8a;
+        font-size: 18px;
+        line-height: 24px;
     }
 </style>
