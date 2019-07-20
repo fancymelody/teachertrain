@@ -49,7 +49,7 @@
               iconSrc:this.$store.state.url + "teachertrain/sidebar/study.png",
               children: [
                 {name:"我的视频", route: "/teachertrain/videostudying"},
-                {name:"我的文章",route:"/teachertrain/acticlestudying"}
+                {name:"我的文章",route:"/teachertrain/articlestudying"}
               ],
               close: true
             },
