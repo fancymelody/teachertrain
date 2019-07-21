@@ -58,7 +58,8 @@
             name: "学习情况",
             iconSrc: this.$store.state.url + "teachertrain/sidebar/studysituation.png",
             children: [],
-            close: true
+            close: true,
+            route: "/teachertrain/condition",
           },
           {
             name: "直播",

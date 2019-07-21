@@ -8,6 +8,8 @@ import videostudied from "../components/teachertrain/mystudy/videostudied";
 import videoplay from "../components/teachertrain/mystudy/videoplay";
 import articlestudying from "../components/teachertrain/mystudy/articlestudying";
 import articlestudied from "../components/teachertrain/mystudy/articlestudied";
+import articlereading from "../components/teachertrain/mystudy/articlereading";
+import condition from "../components/teachertrain/studycondition/condition";
 
 
 
@@ -27,8 +29,10 @@ export default new Router({
           { path: '/teachertrain/videoplay', component: videoplay},
           { path: '/teachertrain/articlestudying', component: articlestudying },
           { path: '/teachertrain/articlestudied', component: articlestudied },
+          {path:'/teachertrain/condition',component:condition},
       ]
     },
     { path: '/videoplay', component: videoplay},
+    { path: '/articlereading', component: articlereading},
   ]
 })
