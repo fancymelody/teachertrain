@@ -3,13 +3,15 @@
         <div class="tab">
             <ul class="tabitemlist">
                 <li class="item coursestudying" id="coursestudying">
-                    <a class="tabword">
-                        <router-link to="/teachertrain/videostudying">学习中</router-link>
+                    <a class="tabword" @click="gotoStudying">
+                        学习中
+                        <!-- <router-link to="/teachertrain/videostudying">学习中</router-link> -->
                     </a>
                 </li>
                 <li class="item coursestudied" id="coursestudied">
-                    <a class="tabword">
-                        <router-link to="/teachertrain/videostudied">已完成</router-link>
+                    <a class="tabword" @click="gotoStudied">
+                        已完成
+                        <!-- <router-link to="/teachertrain/videostudied">已完成</router-link> -->
                     </a>
                 </li>
             </ul>
@@ -72,6 +74,14 @@
                 ],
             }
         },
+        methods: {
+            gotoStudying() {
+                this.$router.push('/teachertrain/videostudying');
+            },
+            gotoStudied() {
+                this.$router.push('/teachertrain/videostudied');
+            },
+        }
     }
 
 </script>
@@ -86,12 +96,12 @@
     .videostudying {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        height: 100%;
+        /* width: 100%;
+        height: 100%; */
         padding: 0;
     }
 
-    .clearfix:before,
+    /* .clearfix:before,
     .clearfix:after {
         display: table;
         content: "";
@@ -99,12 +109,12 @@
 
     .clearfix:after {
         clear: both;
-    }
+    } */
 
     /*清除浮动*/
-    .clear {
+    /* .clear {
         *zoom: 1;
-    }
+    } */
 
     .tab {
         width: 100%;

@@ -3,13 +3,15 @@
         <div class="tab">
             <ul class="tabitemlist">
                 <li class="item coursestudying" id="coursestudying">
-                    <a class="tabword">
-                        <router-link to="/teachertrain/videostudying">学习中</router-link>
+                    <a href="#" class="tabword" @click="gotoStudying">
+                        学习中
+                        <!-- <router-link to="/teachertrain/videostudying">学习中</router-link> -->
                     </a>
                 </li>
                 <li class="item coursestudied" id="coursestudied">
-                    <a class="tabword">
-                        <router-link to="/teachertrain/videostudied">已完成</router-link>
+                    <a href="#" class="tabword" @click="gotoStudied">
+                        已完成
+                        <!-- <router-link to="/teachertrain/videostudied">已完成</router-link> -->
                     </a>
                 </li>
             </ul>
@@ -82,10 +84,16 @@
             }
         },
         methods: {
-            gotoVideoplay() {
-                this.$router.replace('/videoplay');
+            gotoStudying(){
+                // this.$router.push('/teachertrain/videostudying');
+                this.$router.push('/teachertrain/videostudying');
             },
-
+            gotoStudied(){
+                this.$router.push('/teachertrain/videostudied');
+            },
+            gotoVideoplay() {
+                this.$router.push('/videoplay');
+            },
         }
     }
 
@@ -106,7 +114,7 @@
         padding: 0;
     }
 
-    .clearfix:before,
+    /* .clearfix:before,
     .clearfix:after {
         display: table;
         content: "";
@@ -117,9 +125,9 @@
     }
 
     /*清除浮动*/
-    .clear {
+    /* .clear {
         *zoom: 1;
-    }
+    } */ 
 
     .tab {
         width: 100%;
@@ -127,12 +135,12 @@
         padding: 8px 25px 0;
         margin-bottom: 10px;
         height: 52px;
-        /* border: 1px solid #000; */
+        border: 1px solid #000;
     }
 
     .tabitemlist {
         float: left;
-        /* border: 1px solid #000; */
+        border: 1px solid rgb(226, 22, 22);
     }
 
     .item {
@@ -144,7 +152,7 @@
         line-height: 32px;
         font-weight: bold;
         list-style: none;
-        /* border: 1px solid #000; */
+        border: 1px solid #000;
     }
 
     a {

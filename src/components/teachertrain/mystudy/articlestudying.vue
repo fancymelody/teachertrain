@@ -21,7 +21,7 @@
                         <div class="articleitemdetail">
                             <div class="title">
                                 <h2>
-                                    <a href="" target="_blank" style="color:#000;" class="titleword">
+                                    <a target="_blank" style="color:#000;" class="titleword" @click="gotoArticlereading">
                                         <span>{{item.title}}</span>
                                     </a>
                                 </h2>
@@ -32,7 +32,7 @@
                             <div class="btnbox">
                                 <img :src="item.imgSrc" class="headimage">
                                 <span>{{item.label}}|{{item.time}}</span>
-                                <button class="btn"><span>开始阅读</span></button>
+                                <button class="btn" @click="gotoArticlereading"><span>开始阅读</span></button>
                             </div>
                         </div>
                     </div>
@@ -47,8 +47,8 @@
                     <div class="recommendmain">
                         <div class="recommenditem" v-for="(item,index) in articles">
                             <div class="recommend_title">
-                                <a href="" target="_blank" style="color:#000;" class="recommendword">
-                                    <span>{{item.title}}</span>
+                                <a target="_blank" style="color:#000;" class="recommendword">
+                                    <span @click="gotoArticlereading">{{item.title}}</span>
                                 </a>
                             </div>
                             <span class="recommendtime">{{item.label}}|{{item.time}}</span>
@@ -104,6 +104,11 @@
                 ],
             }
         },
+        methods:{
+            gotoArticlereading(){
+                this.$router.push('/articlereading');
+            }
+        }
     }
 
 </script>

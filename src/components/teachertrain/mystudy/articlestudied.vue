@@ -47,7 +47,7 @@
                         <div class="recommendmain">
                             <div class="recommenditem" v-for="(item,index) in articles">
                                 <div class="recommend_title">
-                                    <a href="" target="_blank" style="color:#000;" class="recommendword">
+                                    <a href="#" target="_blank" style="color:#000;" class="recommendword">
                                         <span>{{item.title}}</span>
                                     </a>
                                 </div>
