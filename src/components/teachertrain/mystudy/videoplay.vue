@@ -116,7 +116,7 @@
 </script>
 
 
-<style>
+<style scoped>
   .play {
       width: 100%;
       height: 94%;
@@ -155,8 +155,7 @@
 
   .headline .t1 {
       width: 73px;
-      height: 27px;
-      /* line-height: 32px; */
+      height: 28px;
       text-align: center;
       display: inline-block;
       border:solid;

@@ -72,7 +72,7 @@
     }
 
 </script>
-<style>
+<style scoped>
 .tabbar{
     background:#008573;
     height: 50px;
