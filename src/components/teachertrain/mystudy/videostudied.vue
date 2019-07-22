@@ -83,7 +83,6 @@
             },
         }
     }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -97,25 +96,22 @@
         display: flex;
         flex-direction: column;
         /* width: 100%;
-        height: 100%; */
+            height: 100%; */
         padding: 0;
     }
 
     /* .clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
-    }
-
-    .clearfix:after {
-        clear: both;
-    } */
-
+        .clearfix:after {
+            display: table;
+            content: "";
+        }
+        .clearfix:after {
+            clear: both;
+        } */
     /*清除浮动*/
     /* .clear {
-        *zoom: 1;
-    } */
-
+            *zoom: 1;
+        } */
     .tab {
         width: 100%;
         background-color: #7188bb;

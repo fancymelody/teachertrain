@@ -10,29 +10,30 @@ import articlestudying from "../components/teachertrain/mystudy/articlestudying"
 import articlestudied from "../components/teachertrain/mystudy/articlestudied";
 import articlereading from "../components/teachertrain/mystudy/articlereading";
 import condition from "../components/teachertrain/studycondition/condition";
-
-
-
+import homeworkwriting from "../components/teachertrain/homework/homeworkwriting";
+import homeworkwrote from "../components/teachertrain/homework/homeworkwrote";
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path:'/',redirect:'/teachertrain/videostudying'},
+    { path: '/', redirect: '/teachertrain/videostudying' },
     {
       path: '/teachertrain',
       component: sidebartrain,
       children: [
-          { path: '/teachertrain/videostudying', component: videostudying },
-          { path: '/teachertrain/videostudied', component: videostudied },
-          { path: '/teachertrain/videoplay', component: videoplay},
-          { path: '/teachertrain/articlestudying', component: articlestudying },
-          { path: '/teachertrain/articlestudied', component: articlestudied },
-          {path:'/teachertrain/condition',component:condition},
+        { path: '/teachertrain/videostudying', component: videostudying },
+        { path: '/teachertrain/videostudied', component: videostudied },
+        { path: '/teachertrain/videoplay', component: videoplay },
+        { path: '/teachertrain/articlestudying', component: articlestudying },
+        { path: '/teachertrain/articlestudied', component: articlestudied },
+        { path: '/teachertrain/condition', component: condition },
+        { path: '/teachertrain/homeworkwriting', component: homeworkwriting },
+        { path: '/teachertrain/homeworkwrote', component: homeworkwrote },
       ]
     },
-    { path: '/videoplay', component: videoplay},
-    { path: '/articlereading', component: articlereading},
+    { path: '/videoplay', component: videoplay },
+    { path: '/articlereading', component: articlereading },
   ]
 })

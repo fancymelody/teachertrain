@@ -59,7 +59,7 @@
               iconSrc: this.$store.state.url + "teachertrain/sidebar/homework.png",
               children: [],
               close: true,
-              route: ""
+              route: "/teachertrain/homeworkwriting",
             },
             {
               name: "学习情况",
