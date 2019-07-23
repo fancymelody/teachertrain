@@ -194,7 +194,7 @@
         float: right;
         width: 20%;
         height: 100%;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
         /* background: rgb(133, 207, 133); */
     }
 
