@@ -56,8 +56,8 @@
                 classes: [
                     {
                         progressvalue: 82.4,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        name: "人文科技艺术专题",
+                        imgSrc: this.$store.state.url + 'teachertrain/video/flutter.jpg',
+                        name: "flutter",
                     },
                     {
                         progressvalue: 82.4,
@@ -135,12 +135,12 @@
         padding: 8px 25px 0;
         margin-bottom: 10px;
         height: 52px;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
     }
 
     .tabitemlist {
         float: left;
-        border: 1px solid rgb(226, 22, 22);
+        /* border: 1px solid rgb(226, 22, 22); */
     }
 
     .item {
@@ -152,7 +152,7 @@
         line-height: 32px;
         font-weight: bold;
         list-style: none;
-        border: 1px solid #000;
+        /* border: 1px solid #000; */
     }
 
     a {
@@ -196,7 +196,7 @@
 
     img {
         display: block;
-        padding: 10px 10px;
+        padding: 5px 10px;
         width: 100%;
         max-height: 190px;
     }

@@ -12,6 +12,7 @@ import articlereading from "../components/teachertrain/mystudy/articlereading";
 import condition from "../components/teachertrain/studycondition/condition";
 import homeworkwriting from "../components/teachertrain/homework/homeworkwriting";
 import homeworkwrote from "../components/teachertrain/homework/homeworkwrote";
+import homework from "../components/teachertrain/homework/homework";
 
 
 Vue.use(Router)
@@ -35,5 +36,6 @@ export default new Router({
     },
     { path: '/videoplay', component: videoplay },
     { path: '/articlereading', component: articlereading },
+    { path: '/homework', component:homework },
   ]
 })
