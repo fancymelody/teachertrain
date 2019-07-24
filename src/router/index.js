@@ -13,7 +13,8 @@ import condition from "../components/teachertrain/studycondition/condition";
 import homeworkwriting from "../components/teachertrain/homework/homeworkwriting";
 import homeworkwrote from "../components/teachertrain/homework/homeworkwrote";
 import homework from "../components/teachertrain/homework/homework";
-import message from '../components/teachertrain/message/message'
+import message from '../components/teachertrain/message/message';
+import community from '../components/teachertrain/community/community';
 
 
 Vue.use(Router)
@@ -33,11 +34,12 @@ export default new Router({
         { path: '/teachertrain/condition', component: condition },
         { path: '/teachertrain/homeworkwriting', component: homeworkwriting },
         { path: '/teachertrain/homeworkwrote', component: homeworkwrote },
+        { path: '/teachertrain/message', component: message },
+        { path: '/teachertrain/community', component: community },        
       ]
     },
     { path: '/videoplay', component: videoplay },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
-    { path:'/message',component:message}
   ]
 })

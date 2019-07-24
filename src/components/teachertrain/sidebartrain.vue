@@ -69,12 +69,26 @@
               route: "/teachertrain/condition",
             },
             {
+              name: "消息",
+              iconSrc: this.$store.state.url + "teachertrain/sidebar/studysituation.png",
+              children: [],
+              close: true,
+              route: "/teachertrain/message",
+            },
+            {
+              name: "社区",
+              iconSrc: this.$store.state.url + "teachertrain/sidebar/studysituation.png",
+              children: [],
+              close: true,
+              route: "/teachertrain/community",
+            },
+            {
               name: "直播",
               iconSrc: this.$store.state.url + "teachertrain/sidebar/studysituation.png",
               children: [],
               close: true,
               route: "",
-            }
+            },
           ],
           height: 0,
           style: ''
