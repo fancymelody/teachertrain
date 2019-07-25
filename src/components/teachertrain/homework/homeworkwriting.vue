@@ -25,12 +25,12 @@
                     </div>
                     <div class="detail">
                         <div class="homeworktitle" @click="dropdown(index)">
-                            <img :src="item.flag==true?img_lower:img_upper" class="imgtri">
+                            <img :src="item.select_flag==true?img_lower:img_upper" class="imgtri">
                             <span class="titleword">{{item.homeworktitle}}</span>
                             <button class="btn" @click="onClick"><span>前往测验</span></button>
                         </div>
                         <!-- <div class="infodetail" :style="{'display' : flag ? 'block' : 'none'}" v-if="flag"> -->
-                        <div class="infodetail" v-if="item.flag">
+                        <div class="infodetail" v-if="item.select_flag">
                             <div class="detailitem">
                                 <div class="leftinfo deadline">
                                     截止时间
@@ -67,20 +67,20 @@
 
                 homework: [
                     {
-                        chapternum:"一",
+                        chapternum: "一",
                         chaptername: "各流派的大神和他们的故事",
                         homeworktitle: "第一章小测验",
                         deadline: "2018-06-11 23:59:59",
                         totalscore: 8.00,
-                        flag: false,//默认关闭
+                        select_flag: false,//下拉框默认关闭
                     },
                     {
-                        chapternum:"二",
+                        chapternum: "二",
                         chaptername: "行为背后的目的",
                         homeworktitle: "第二章小测验",
                         deadline: "2018-06-11 23:59:59",
                         totalscore: 10.00,
-                        flag: false,//默认关闭
+                        select_flag: false,//默认关闭
                     },
                     {
                         chapternum: "三",
@@ -88,14 +88,46 @@
                         homeworktitle: "第三章小测验",
                         deadline: "2018-06-11 23:59:59",
                         totalscore: 10.00,
-                        flag: false,//默认关闭
+                        select_flag: false,//默认关闭
+                    },
+                    {
+                        chapternum: "四",
+                        chaptername: "情绪体验和压力调节",
+                        homeworktitle: "第四章小测验",
+                        deadline: "2018-06-11 23:59:59",
+                        totalscore: 20.00,
+                        select_flag: false,//默认关闭
+                    },
+                    {
+                        chapternum: "五",
+                        chaptername: "催眠的真相",
+                        homeworktitle: "第五章小测验",
+                        deadline: "2018-06-11 23:59:59",
+                        totalscore: 15.00,
+                        select_flag: false,//默认关闭
+                    },
+                    {
+                        chapternum: "六",
+                        chaptername: "你到底能有多聪明",
+                        homeworktitle: "第六章小测验",
+                        deadline: "2018-06-11 23:59:59",
+                        totalscore: 5.00,
+                        select_flag: false,//默认关闭
+                    },
+                    {
+                        chapternum: "七",
+                        chaptername: "什么样的性格最受欢迎",
+                        homeworktitle: "第七章小测验",
+                        deadline: "2018-06-11 23:59:59",
+                        totalscore: 10.00,
+                        select_flag: false,//默认关闭
                     },
                 ],
             }
         },
         methods: {
             dropdown(index) {
-                this.homework[index].flag = !this.homework[index].flag;
+                this.homework[index].select_flag = !this.homework[index].select_flag;
             },
 
             onClick() {
