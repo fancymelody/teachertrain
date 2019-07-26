@@ -28,7 +28,6 @@ export default new Router({
       children: [
         { path: '/teachertrain/videostudying', component: videostudying },
         { path: '/teachertrain/videostudied', component: videostudied },
-        { path: '/teachertrain/videoplay', component: videoplay },
         { path: '/teachertrain/articlestudying', component: articlestudying },
         { path: '/teachertrain/articlestudied', component: articlestudied },
         { path: '/teachertrain/condition', component: condition },
@@ -38,7 +37,7 @@ export default new Router({
         { path: '/teachertrain/community', component: community },        
       ]
     },
-    { path: '/videoplay', component: videoplay },
+    { path: '/videoplay/:title/:image',name:"videoplay", component: videoplay },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
   ]

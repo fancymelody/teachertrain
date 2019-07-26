@@ -8,26 +8,33 @@
               </div>
           </div>
           <div class="main">
-              <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true"
-                  :options="playerOptions"></video-player>
+            <Media 
+            :autoplay="false"
+            :kind="'video'"
+            :controls="true"
+            :src = 'videosrc'
+            style="width: 75%; margin-left: 10%"
+            @pause='handle()'
+          >
+          </Media>
           </div>
           <div class="bottom">
               <div class="left">
-                  <button>上一节</button>
-                  <button>下一节</button>
+                  <!-- <button @click="previous">上一节</button>
+                  <button @click="next">下一节</button> -->
               </div>
               <div class="right">
-                  <button>作业考试</button>
+                  <router-link v-for="(item) in right" :to="{path:item.path}" :key="item.id"><button >{{item.name}}</button></router-link>
               </div>
           </div>
       </div>
       <div class="col-md-3 catalog">
           <div class="message">
               <div class="topic">
-                  <span class="title"><b>Flutter</b></span>
+                  <span class="title"><b>{{this.$route.params.title}}</b></span>
                   <span class="author">胖子</span>
               </div>
-              <img :src="classpic" alt="">
+              <img :src="this.$route.params.image" alt="">
           </div>
           <div class="tabbar">
               <div class="toptitle">
@@ -36,13 +43,13 @@
           </div>
           <div class="list" style="position:absolute; height:400px; overflow-y:auto">
               <ul>
-                  <li v-for="item in list" @click="handleClick(item)">
+                <li v-for="(item,index) in list" @click="handleClick(item,index)" :class="activeClass==index?'active':''">
                       <span class="title1 t1" :title="item.t1"><b>{{item.t1}}</b></span>
                           <span class="time_icon" :title="name" :style=time_icon v-if="item.time"></span>
                           <span v-else="" style="width: 16px;height:16px">&nbsp</span>
                       <span class="title2 t2" :title="item.t2">{{item.t2}}</span>
                       <span class="time" :title="name">{{item.time}}</span>
-                  </li>
+                </li>
               </ul>
           </div>
       </div>
@@ -50,52 +57,36 @@
 </template>
 
 <script>
-  import { videoPlayer } from 'vue-video-player'
-  import 'video.js/dist/video-js.css'
-  import 'vue-video-player/src/custom-theme.css'
+  import Media from '@dongido/vue-viaudio'
   export default {
       components: {
-          videoPlayer
+        Media
       },
       data() {
           return {
-              t1: "",
-              t2: "",
+              t1: "1.1",
+              t2: "Flutter介绍和主流框架对比",
+              videosrc:this.$store.state.src,
+              activeClass:1,
               classpic:this.$store.state.url + 'teachertrain/video/flutter.jpg',
-              playerOptions: {
-                  playbackRates: [0.7, 1.0, 1.5, 2.0],
-                  autoplay: false, 
-                  controls: true, 
-                  preload: 'auto', 
-                  muted: false,
-                  loop: false,
-                  language: 'zh-CN',
-                  aspectRatio: '16:9', 
-                  fluid: true, 
-                  sources: [{
-                      type: 'video/mp4',
-                      src: 'https://onlineprograme.s3.us-east-2.amazonaws.com/course/video/%E7%AC%AC1%E8%AF%BE.mp4'
-                  }],
-                  poster: "", 
-                  width: document.documentElement.clientWidth,
-                  notSupportedMessage: '此视频暂无法播放，请稍后再试' 
-              },
+              
               list: [
-                  {
-                      t1: "第一章",
-                      t2: "课程介绍",
+                  {t1: "第一章",t2: "课程介绍",},
+                  {t1: "1.1",t2: "Flutter介绍和主流框架对比",
+                      time: "00:07:44",
+                      video_url:this.$store.state.src
                   },
                   {
-                      t1: "1.1",
-                      t2: "Flutter介绍和主流框架对比",
+                      t1: "1.2",
+                      t2: "Flutter超高性能",
                       time: "00:07:44",
-                  },
-                  {
-                      t1: "1.1",
-                      t2: "Flutter介绍和主流框架对比",
-                      time: "00:07:44",
+                      video_url:this.$store.state.src
                   },
 
+              ],
+              right:[
+                  {name:"作业考试",path:'/teachertrain/homeworkwriting'},
+                  {name:"学习情况",path:'/teachertrain/condition'},
               ],
               time_icon: {
                   background: "url(" + require("../../../../static/images/teachertrain/video/img_all.png") + ") no-repeat scroll -139px -127px transparent",
@@ -106,11 +97,33 @@
 
       },
       methods: {
-          handleClick(item){
+          created(){
+              this.getRouterData()
+          },
+          getRouterData(){
+              this.title=this.$route.title
+          },
+          handleClick(item,index){
               this.t1= item.t1;
               this.t2 = item.t2;
-          }
-      }
+              this.activeClass=index;
+              if(item.video_url){
+                this.videosrc=item.video_url;
+              }
+              else{
+                  this.videosrc=this.list[index+1].video_url;
+                }                        
+            },
+          handle() {
+                console.log('Video paused!, playing in 2 sec...')
+                setTimeout( () => {
+                this.$refs.coursevideo.play() 
+                }, 2000)
+            },
+            previous(){
+
+            }
+        },
 
   }
 </script>
@@ -176,13 +189,16 @@
     margin-left: 20px;
       height: 70%;
       background: #000;
+      
+      
   }
-
-  .video-player.vjs-custom-skin {
+  /* Media{
       margin-left: 12%;
       width: 75%;
       padding-top:2px;
-  }
+      border:solid;
+      border-color: #FFF;
+  } */
 
   .bottom {
       height: 10%;
@@ -276,8 +292,11 @@
       padding-left: 0px;
   }
 
-  ul :hover {
+  li:hover {
       background-color: gainsboro;
+  }
+  li.active{
+      background-color:#008573;
   }
 
   li {
