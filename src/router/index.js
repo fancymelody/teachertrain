@@ -13,6 +13,7 @@ import condition from "../components/teachertrain/studycondition/condition";
 import homeworkwriting from "../components/teachertrain/homework/homeworkwriting";
 import homeworkwrote from "../components/teachertrain/homework/homeworkwrote";
 import homework from "../components/teachertrain/homework/homework";
+import result from "../components/teachertrain/homework/result";
 import message from '../components/teachertrain/message/message';
 import community from '../components/teachertrain/community/community';
 
@@ -40,5 +41,6 @@ export default new Router({
     { path: '/videoplay/:title/:image',name:"videoplay", component: videoplay },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
+    { path: '/result', component:result },
   ]
 })
