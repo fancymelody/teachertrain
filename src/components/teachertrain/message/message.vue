@@ -2,53 +2,55 @@
     <div class="message">
         <ul id="myTab" class="nav nav-tabs">
             <li class="active">
-                <a href="#unread" data-toggle="tab" @click="change('message_unread', 1)">未读</a>
+                <a href="#unread" data-toggle="tab">未读</a>
             </li>
             <li>
-                <a href="#read" data-toggle="tab" @click="change('message_read', 1)">已读</a>
+                <a href="#read" data-toggle="tab">已读</a>
             </li>
         </ul>
         <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active" id="unread">
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="item in message_unread">
-                            <p>{{item.content}}</p>
+                        <li class="list-group-item" v-for="(item,index) in unreadList" :key="index">
+                            <button class="sigin" @click="SiginRead(index)">标记为已读</button>
+                            <p>{{item.content}}</p>                       
                             <p>{{item.time}}</p>
+                            
                         </li>
                     </ul>
-                    <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
-                        <li  v-for="item in pagination" @click="change(currentType, item.num)">
-                            <a href="#" :class="item.cls">{{item.num}}</a>
-                        </li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    <pagination :num="unreadData.length" :limit="limit" @getNew="getNew"></pagination>
                 </div>
                     
                 <div class="tab-pane fade" id="read">
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="item in message_read">
+                        <li class="list-group-item" v-for="item in readList">
                             <p>{{item.content}}</p>
                             <p>{{item.time}}</p>
                         </li>
                     </ul>
-                    <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li  v-for="item in pagination" @click="change(currentType, item.num)">
-                                <a href="#" :class="item.cls">{{item.num}}</a>
-                            </li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                    <pagination :num="readData.length" :limit="limit" @getNew="setNew"></pagination>
                 </div>
             </div>
     </div>
 </template>
 
 <script>
+    import pagination from "../utils/pagination.vue";
     export default{
+        name:"message",
+        components:{
+            pagination
+        },
         data(){
             return{
+                limit:7,
+                unreadList: [],
+                readList:[],
+                unreadData: [],
+                readData:[],
                 message_unread:[
+                    {content:"请1月1日",time:"2019年7月24日10:53"},
+                    {content:"消息1",time:"2019年7月24日10:54"},
                     {content:"消息1",time:"2019年7月24日10:53"},
                     {content:"消息1",time:"2019年7月24日10:53"},
                     {content:"消息1",time:"2019年7月24日10:53"},
@@ -58,61 +60,37 @@
                     {content:"消息1",time:"2019年7月24日10:53"},
                     {content:"消息1",time:"2019年7月24日10:53"},
                     {content:"消息1",time:"2019年7月24日10:53"},
-                    {content:"消息1",time:"2019年7月24日10:53"},
-                    {content:"消息1",time:"2019年7月24日10:53"},
-                ] ,
-                message_read:[
-                    {content:"消息1",time:"2019年7月24日10:53"},
-                    {content:"消息1",time:"2019年7月24日10:53"},
-                    {content:"消息1",time:"2019年7月24日10:53"},
-                ],
-                currentData: [],
-                pagination: [],
-                currentType: "message_unread"               
+                ] ,         
             }
         },
         methods:{
-            change(message_type,currentPage){
-                this.currentType=message_type;
-                let mes_unread_len=this.message_unread.length;
-                let mes_read_len=this.message_read.length;
-                let per_page=6;
-                if(message_type==="message_unread"){
-                    if(mes_unread_len===0){
-                        console.log("您还没有未读消息！");
-                    }else{
-                        this.pagination=new Array(Math.ceil(mes_unread_len/per_page));
-                        for(let i=0;i<this.pagination.length;i+=1){
-                            this.pagination[i]=(i+1)===currentPage?{cls:"active",num:i+1}:{cls:"better",num:i+1};
-                        }
-                        this.currentData=this.message_unread.slice((currentPage-1)*per_page,currentPage*per_page);
-                    }
-                }else if(message_type==="message_read"){
-                    if(mes_unread_len===0){
-                        console.log("您还没有已读消息！");
-                    }else{
-                        this.pagination=new Array(Math.ceil(mes_read_len/per_page));
-                        for(let i=0;i<this.pagination.length;i+=1){
-                            this.pagination[i]=(i+1)===currentPage?{cls:"active",num:i+1}:{cls:"better",num:i+1};
-                        }
-                        this.currentData=this.message_unread.slice((currentPage-1)*per_page,currentPage*per_page);
-                    }
-                }
+            getNew(value) {
+                this.unreadList = this.unreadData.slice(value, value + this.limit);
             },
-            created() {
-            this.change('message_system', 2);
-            }   
-        }
+            setNew(value) {
+                this.readList = this.readData.slice(value, value + this.limit);
+            },
+            SiginRead(index){
+                this.readData.splice(0,0,this.unreadList[index]); 
+                this.setNew(0);
+                this.unreadData.splice(index,1);
+                this.getNew(0);
+            }
+        },
+        mounted() {
+                this.unreadData = this.message_unread;
+                this.getNew(0);
+            },
 
     }
 </script>
 
 <style>
     .message{
-        margin-left: 250px;
-        margin-top:56px;
-        height: 700px;
-        border:solid;
+        height: 710px;
+    }
+    .nav-tabs{
+        background-color: #B0C4DE !important;
     }
     .tab-content{
         margin-top:20px;
@@ -125,9 +103,15 @@
     .list-group-item:hover{
         background-color: 	#B0C4DE !important;
     }
-    .pagination{
+    .list-group-item p{
+        word-wrap:break-word;
+    }
+    .sigin{
         float: right;
-        float: bottom;
-        margin:10 10 10 0;
+        margin-right: 20px;
+        margin-top:20px;
+        background:		#00FF7F;
+        border-radius: 3px;
+        border-width: 1px;
     }
 </style>
