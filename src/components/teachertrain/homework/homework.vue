@@ -131,7 +131,7 @@
                         alert("时间超时");
 
                          //this.$router.push('/result');
-                        window.location.href="/result"
+                        window.location.href="#/result"
                         // this.$options.methods.gotoResult();
 
                     } else {
