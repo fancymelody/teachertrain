@@ -8,9 +8,9 @@
             <!-- 进度条 -->
             <div class="progress">
                 <div class="progress-bar bg-success" role="progressbar"
-                    v-bind:style="{width:((quizProgress+1)*100/quiz.length)+'%'}" aria-valuenow="25" aria-valuemin="0"
+                    v-bind:style="{width:((quizProgress)*100/quiz.length)+'%'}" aria-valuenow="25" aria-valuemin="0"
                     aria-valuemax="100">
-                    进度
+                    进行中
                 </div>
             </div>
             <!-- 单选题 -->
@@ -78,8 +78,8 @@
                 ans: '', //选择的答案
                 answers: new Map(),
                 score: 0,
-                minutes: 15,
-                seconds: 0,
+                minutes: 0,
+                seconds: 10,
                 // size: quiz.length,
             }
         },
@@ -98,12 +98,10 @@
                 if (this.quizProgress < this.quiz.length - 1) {
                     this.answers.set(this.quizProgress, this.ans);
                     this.quizProgress++;
-
+                    console.log(this.answers);
                     this.ans = '';
                 } else if (this.quizProgress == this.quiz.length - 1) {
                     console.log("结束");
-                    // this.$router.push('/submit');
-                    // console.log("结束");
                     if (confirm("你确定提交吗？")) {
                         // alert("点击了确定");
                         this.$router.push('/result');
@@ -127,14 +125,36 @@
                     } else if (_this.minutes === 0 && _this.seconds === 0) {
                         _this.seconds = 0
                         window.clearInterval(time)
+
+                        console.log("时间超时");
+                        //弹出一个对话框
+                        alert("时间超时");
+
+                         //this.$router.push('/result');
+                        window.location.href="/result"
+                        // this.$options.methods.gotoResult();
+
                     } else {
                         _this.seconds -= 1
                     }
                 }, 1000)
+            },
+            gotoResult() {
+                this.$router.push('/result');
             }
+            // isFinish() {
+            //     if (minutes == 0 && seconds == 0) {
+            //         console.log("时间超时");
+            //             //弹出一个对话框
+            //             alert("时间超时");
+            //         }
+            //         this.$router.push('/result');
+            //     }
+            // }
         },
         mounted() {
             this.timer()
+            // this.isFinish()
         },
         watch: {
             second: {
