@@ -15,7 +15,10 @@ import homeworkwrote from "../components/teachertrain/homework/homeworkwrote";
 import homework from "../components/teachertrain/homework/homework";
 import result from "../components/teachertrain/homework/result";
 import message from '../components/teachertrain/message/message';
+import inform from '@/components/teachertrain/message/inform';
+import news from '@/components/teachertrain/message/news'
 import community from '../components/teachertrain/community/community';
+import space from '../components/teachertrain/space/space';
 
 
 Vue.use(Router)
@@ -34,13 +37,28 @@ export default new Router({
         { path: '/teachertrain/condition', component: condition },
         { path: '/teachertrain/homeworkwriting', component: homeworkwriting },
         { path: '/teachertrain/homeworkwrote', component: homeworkwrote },
-        { path: '/teachertrain/message', component: message },
-        { path: '/teachertrain/community', component: community },        
+        { path: 'message', 
+          component: message,
+          redirect:'/inform',
+          children:[
+            { path:'/inform',
+              name:'inform',
+              component:inform
+            },
+            { path:'/news',
+              name:'news',
+              component:news
+            }
+          ] 
+        },
+        { path: '/teachertrain/community', component: community },  
+        { path: '/teachertrain/space', component:space },      
       ]
     },
     { path: '/videoplay/:title/:image',name:"videoplay", component: videoplay },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
     { path: '/result', component:result },
+    
   ]
 })
