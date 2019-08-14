@@ -30,7 +30,7 @@
                             <div class="finishword">
                                 <span>完成时间:{{item.finishtime}}</span>
                             </div>
-                            <button class="btn"><span>查看详情</span></button>
+                            <button class="btn" @click="checkCondition"><span>查看详情</span></button>
                         </div>
                     </div>
                 </div>
@@ -96,6 +96,9 @@
             gotoStudied() {
                 this.$router.push('/teachertrain/videostudied');
             },
+            checkCondition(){
+                this.$router.push('/teachertrain/condition');
+            }
         }
     }
 </script>
