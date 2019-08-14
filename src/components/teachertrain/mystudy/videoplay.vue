@@ -24,17 +24,17 @@
                   <button @click="next">下一节</button> -->
               </div>
               <div class="right">
-                  <router-link v-for="(item) in right" :to="{path:item.path}" :key="item.id"><button >{{item.name}}</button></router-link>
+                  <router-link v-for="(item) in right" :to="{path:item.path}" :key="item.id" tag="button">{{item.name}}</router-link>
               </div>
           </div>
       </div>
       <div class="col-md-3 catalog">
           <div class="message">
               <div class="topic">
-                  <span class="title"><b>{{this.$route.params.title}}</b></span>
+                  <span class="title"><b>{{this.$route.query.title}}</b></span>
                   <span class="author">胖子</span>
               </div>
-              <img :src="this.$route.params.image" alt="">
+              <img :src="this.$route.query.image" alt="">
           </div>
           <div class="tabbar">
               <div class="toptitle">
@@ -58,6 +58,7 @@
 
 <script>
   import Media from '@dongido/vue-viaudio'
+  import {mapState} from 'vuex'
   export default {
       components: {
         Media
@@ -66,11 +67,11 @@
           return {
               t1: "",
               t2:"",
-              videosrc:this.$store.state.src,
-              activeClass:1,
-              classpic:this.$store.state.url + 'teachertrain/video/flutter.jpg',
-              
-              list: this.$route.params.content,
+              ...mapState({
+                videosrc:'src',
+              }),
+              activeClass:1,            
+              list: this.$route.query.contents,
               right:[
                   {name:"作业考试",path:'/teachertrain/homeworkwriting'},
                   {name:"学习情况",path:'/teachertrain/condition'},

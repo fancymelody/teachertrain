@@ -39,7 +39,7 @@
                                 <span>{{item.name}}</span>
                             </div>
                             <button class="btn"><span>我要做作业</span></button>
-                            <button class="btn" @click="gotoVideoplay(item)"><span>开始学习</span></button>
+                            <router-link class="btn" :to="{path:'/videoplay',query:{title: item.name,image: item.imgSrc,contents:item.content}}"  tag="button"><span>开始学习</span></router-link>
                         </div>
                     </div>
                 </div>
@@ -143,16 +143,17 @@
             gotoStudied() {
                 this.$router.push('/teachertrain/videostudied');
             },
-            gotoVideoplay(item) {
-                this.$router.push({
-                    name: "videoplay",
-                    params: {
-                        title: item.name,
-                        image: item.imgSrc,
-                        content:item.content
-                    }
-                })
-            },
+            // gotoVideoplay(item) {
+            //     this.$router.push({
+            //         name: "videoplay",
+            //         query: {
+            //             title: item.name,
+            //             image: item.imgSrc,
+            //             contents:item.content
+            //         }
+            //     })
+                // window.open(href,'_blank')
+            // },
         }
     }
 

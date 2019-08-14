@@ -20,7 +20,6 @@ import news from '@/components/teachertrain/message/news'
 import community from '../components/teachertrain/community/community';
 import space from '../components/teachertrain/space/space';
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -30,7 +29,7 @@ export default new Router({
       path: '/teachertrain',
       component: sidebartrain,
       children: [
-        { path: '/teachertrain/videostudying', component: videostudying },
+        { path: '/teachertrain/videostudying', component:videostudying  },
         { path: '/teachertrain/videostudied', component: videostudied },
         { path: '/teachertrain/articlestudying', component: articlestudying },
         { path: '/teachertrain/articlestudied', component: articlestudied },
@@ -55,7 +54,7 @@ export default new Router({
         { path: '/teachertrain/space', component:space },      
       ]
     },
-    { path: '/videoplay/:title/:image',name:"videoplay", component: videoplay },
+    { path: '/videoplay',name:"videoplay", component: videoplay },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
     { path: '/result', component:result },
