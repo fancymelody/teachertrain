@@ -54,7 +54,7 @@ export default new Router({
         { path: '/teachertrain/space', component:space },      
       ]
     },
-    { path: '/videoplay',name:"videoplay", component: videoplay },
+    { path: '/videoplay',name:"videoplay", component: videoplay, },
     { path: '/articlereading', component: articlereading },
     { path: '/homework', component:homework },
     { path: '/result', component:result },

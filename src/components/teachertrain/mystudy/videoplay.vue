@@ -15,6 +15,8 @@
             :src = 'videosrc'
             style="width: 75%; margin-left: 10%"
             @pause='handle()'
+            @ended='handleEnded()'
+            
           >
           </Media>
           </div>
@@ -79,6 +81,9 @@
               time_icon: {
                   background: "url(" + require("../../../../static/images/teachertrain/video/img_all.png") + ") no-repeat scroll -139px -127px transparent",
               },
+              sus_icon: {
+                  background: "url(" + require("../../../../static/images/teachertrain/video/right_icon.png") + ") no-repeat scroll -139px -127px transparent",
+              },
               name: "点击播放",
 
           }
@@ -114,9 +119,10 @@
                 this.$refs.coursevideo.play() 
                 }, 2000)
             },
-            previous(){
-
-            }
+           handleEnded(icon){
+               console.log("观看已完成");
+               this.time_icon=this.sus_icon
+           }
         },
 
   }
