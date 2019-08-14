@@ -71,7 +71,7 @@
                 videosrc:'src',
               }),
               activeClass:1,            
-              list: this.$route.query.contents,
+              list: "",
               right:[
                   {name:"作业考试",path:'/teachertrain/homeworkwriting'},
                   {name:"学习情况",path:'/teachertrain/condition'},
@@ -83,6 +83,12 @@
 
           }
 
+      },
+      created(){
+        console.log(this.$route.query.title);
+          console.log(JSON.parse(this.$route.query.contents));
+          this.list=JSON.parse(this.$route.query.contents)
+          
       },
       methods: {
           created(){
