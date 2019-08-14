@@ -19,7 +19,7 @@
                 <span class="classname">flutter</span>
             </div>
             <div class="homework">
-                <div class="homeworkitem" v-for="(item,index) in homework">
+                <div class="homeworkitem" v-for="(item,index) in  wroteList">
                     <div class="chapter">
                         <span>第{{item.chapternum}}章&nbsp;&nbsp;{{item.chaptername}}</span>
                     </div>
@@ -52,16 +52,25 @@
                         </div>
                     </div>
                 </div>
+                <pagination :num="wroteData.length" :limit="limit" @getNew="getNew"></pagination>
             </div>
         </div>
+        
     </div>
 </template>
 
 <script>
+    import pagination from "../utils/pagination.vue";
     export default {
         name: 'homeworkwriting',
+        components:{
+                pagination
+            },
         data() {
             return {
+                    limit:6,
+                    wroteList:[],
+                    wroteData:[],
                 img_upper: this.$store.state.url + 'teachertrain/homework/uppertri.png',
                 img_lower: this.$store.state.url + 'teachertrain/homework/lowertri.png',
 
@@ -96,6 +105,10 @@
                 ],
             }
         },
+        mounted() {
+                    this.wroteData = this.homework;
+                    this.getNew(0);
+                },
         methods: {
             dropdown(index) {
                 this.homework[index].flag = !this.homework[index].flag;
@@ -103,7 +116,10 @@
 
             onClick() {
                 this.$router.push('/homework');
-            }
+            },
+            getNew(value) {
+                    this.wroteList = this.wroteData.slice(value, value + this.limit);
+                },
         }
     }
 

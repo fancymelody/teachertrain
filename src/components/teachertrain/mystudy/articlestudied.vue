@@ -17,7 +17,7 @@
         <div class="acticlecontent">
             <div class="left">
                 <div class="articlemain">
-                    <div class="articleitem" v-for="(item,index) in articles">
+                    <div class="articleitem" v-for="(item,index) in studiedList">
                         <div class="articleitemdetail">
                             <div class="title">
                                 <h2>
@@ -36,6 +36,7 @@
                             </div>
                         </div>
                     </div>
+                    <pagination :num="studiedData.length" :limit="limit" @getNew="getNew"></pagination>
                 </div>
             </div>
             <div class="right">
@@ -53,6 +54,7 @@
                             </div>
                             <span class="recommendtime">{{item.label}}|{{item.time}}</span>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -61,10 +63,17 @@
 </template>
 
 <script>
+    import pagination from "../utils/pagination.vue";
     export default {
         name: 'articlestudied',
+        components:{
+                pagination
+            },
         data() {
             return {
+                limit:3,
+                studiedList:[],
+                studiedData:[],
                 articles: [
                     {
                         title: "浅谈青少年的心理特征与心理健康教育",
@@ -107,8 +116,15 @@
         methods: {
             onClick() {
                 this.$router.push('/articlereading');
-            }
-        }
+            },
+            getNew(value) {
+                    this.studiedList = this.studiedData.slice(value, value + this.limit);
+                },
+        },
+        mounted() {
+                    this.studiedData = this.articles;
+                    this.getNew(0);
+                },
     }
 
 </script>

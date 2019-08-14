@@ -17,7 +17,7 @@
             </ul>
         </div>
         <div class="videomain">
-            <div class="videoitem" v-for="(item,index) in classes">
+            <div class="videoitem" v-for="(item,index) in studingList">
                 <div class="videodetail">
                     <div class="imgbox">
                         <img :src="item.imgSrc">
@@ -44,15 +44,23 @@
                     </div>
                 </div>
             </div>
+            <pagination :num="studingData.length" :limit="limit" @getNew="getNew" style="width: 100%"></pagination>
         </div>
     </div>
 </template>
 
 <script>
+    import pagination from "../utils/pagination.vue";
     export default {
         name: 'videostudying',
+        components:{
+                pagination
+            },
         data() {
             return {
+                limit:3,
+                studingList:[],
+                studingData:[],
                 classes: [
                     {
                         progressvalue: 82.4,
@@ -83,7 +91,14 @@
                 ],
             }
         },
+        mounted() {
+                    this.studingData = this.classes;
+                    this.getNew(0);
+                },
         methods: {
+            getNew(value) {
+                    this.studingList = this.studingData.slice(value, value + this.limit);
+                },
             gotoStudying(){
                 // this.$router.push('/teachertrain/videostudying');
                 this.$router.push('/teachertrain/videostudying');
