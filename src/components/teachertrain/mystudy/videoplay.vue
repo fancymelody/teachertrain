@@ -15,7 +15,7 @@
             :src = 'videosrc'
             style="width: 75%; margin-left: 10%"
             @pause='handle()'
-            @ended='handleEnded(item)'       
+            @ended='handleEnded()'       
           >
           </Media>
           </div>
@@ -46,7 +46,7 @@
               <ul>
                 <li v-for="(item,index) in list" @click="handleClick(item,index)" :class="activeClass==index?'active':''">
                       <span class="title1 t1" :title="item.chapter"><b>{{item.chapter}}</b></span>
-                          <span class="time_icon" :title="name" :style=time_icon v-if="item.time"></span>
+                          <span class="time_icon" :title="name" :style=item.view v-if="item.time"></span>
                           <span v-else="" style="width: 16px;height:16px">&nbsp</span>
                       <span class="title2 t2" :title="item.name">{{item.name}}</span>
                       <span class="time" :title="name">{{item.time}}</span>
@@ -67,12 +67,10 @@
 
       data() {
           return {
-              end:false,
+              end:0,
               t1: "",
               t2:"",
-              ...mapState({
-                videosrc:'src',
-              }),
+              videosrc:"",
               activeClass:1,            
               list: "",
               right:[
@@ -82,8 +80,8 @@
               time_icon: {
                   background: "url(" + require("../../../../static/images/teachertrain/video/img_all.png") + ") no-repeat scroll -139px -127px transparent",
               },
-              sus_icon: {
-                  background: "url(" + require("../../../../static/images/teachertrain/video/right_icon.png") + ") no-repeat scroll -139px -127px transparent",
+              right_icon: {
+                  background: "url(" + require("../../../../static/images/teachertrain/video/right_icon.png") + ")",
               },
               name: "点击播放",
 
@@ -94,30 +92,26 @@
         console.log(this.$route.query.title);
           console.log(JSON.parse(this.$route.query.contents));
           this.list=JSON.parse(this.$route.query.contents)
+          for(var i=0;i<this.list.length;i++){
+              this.list[i].view=this.time_icon
+          }
           
       },
       methods: {
-          created(){
-              this.getRouterData()
-          },
           getRouterData(){
               this.title=this.$route.title
           },
           handleClick(item,index){
+              this.end=index,
               this.t1= item.chapter;
               this.t2 = item.name;
               this.activeClass=index;
-              if(item.video_url){
-                this.videosrc=item.video_url;
+              if(item.src){
+                this.videosrc=item.src;
               }
               else{
-                  this.videosrc=this.list[index+1].video_url;
-                }
-
-            if(this.end==true) {
-                this.time_icon=this.right_icon;
-                this.$store.commit('setView',index)
-            }                     
+                  this.videosrc=this.list[index+1].src;
+                }                    
             },
           handle() {
                 console.log('Video paused!, playing in 2 sec...')
@@ -126,8 +120,10 @@
                 }, 2000)
             },
            handleEnded(){
-               return end=true
-               console.log("观看已完成");                      
+            console.log("观看已完成");
+            this.list[this.end].view=this.right_icon;
+            this.$store.commit('setView',this.end)
+                                     
            }
         },
 

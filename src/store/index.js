@@ -7,37 +7,40 @@ Vue.use(Vuex);
 export const store =new Vuex.Store({
     state:{
         url:'../../../static/images/',
-        src:"https://onlineprograme.s3.us-east-2.amazonaws.com/course/video/%E7%AC%AC1%E8%AF%BE.mp4",
         Vue:[
             {
                 chapter: "第一章",
                 name: "课程介绍",
                 score: "是",
-                test: "200/200"
+                test: "200/200",
             },
             {
                 chapter: "1.1",
                 name: "主流框架对比",
                 time: "07分44秒",
                 view: "/",
+                src:"../../../static/images/teachertrain/video/shudu.mp4",
             },
             {
                 chapter: "1.2",
                 name: "Flutter超高性能",
                 time: "06分44秒",
                 view: "/",
+                src:"../../../static/images/teachertrain/video/shudu.mp4",
             },
             {
                 chapter: "第二章",
                 name: "Flutter开发环境",
                 score: "是",
-                test: "150/200"
+                test: "150/200",
+                
             },
             {
                 chapter: "2.1",
                 name: "Flutter环境安装",
                 time: "13分05秒",
                 view: "/",
+                src:"../../../static/images/teachertrain/video/shudu.mp4",
             },
             {
                 chapter: "2.2",
@@ -97,13 +100,13 @@ export const store =new Vuex.Store({
     },
     mutations:{
         setView(state,index){
-            state.Vue[index].view="已观看",
+            state.Vue[index].view="../../../static/images/teachertrain/video/right_icon.png",
             console.log('保存',index+state.Vue[index].view)
         }
     },
     getters:{
         getView(state){
-            console.log('获取',index+state.Vue[index].view)
+            console.log('获取',state.Vue)
             return state.Vue
         }
     },

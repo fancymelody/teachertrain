@@ -11,7 +11,8 @@
                     <td>{{item.chapter}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.time}}</td>
-                    <td>{{item.view}}</td>
+                    <td v-if="(item.view=='/')">{{item.view}}</td>
+                    <td  v-else="(item.view!='/')"><img class="picView" :src="item.view"></img></td>
                     <td>{{item.score}}</td>
                     <td style="color:#008573">{{item.test}}</td>
                 </tr>
