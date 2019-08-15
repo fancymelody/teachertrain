@@ -35,7 +35,6 @@
     </template>
     
     <script>
-        import '@/assets/css/message.css'
         import pagination from "./pagination.vue";
         export default{
             name:"information",
@@ -76,5 +75,28 @@
     
         }
     </script>
+    <style>
+    .nav-tabs{
+    background-color: #B0C4DE !important;
+}
+.tab-content{
+    margin-top:20px;
+}
+.list-group-item{
+    border-left: none;
+    border-right: none;
+    background-color:#f5f6f7;
+}
+.list-group-item:hover{
+    background-color: 	#B0C4DE !important;
+}
+.list-group-item p{
+    word-wrap:break-word;
+}
+.btn.btn-success{
+    float: right;
+    margin-right: 20px;
+    margin-top:20px;
+}</style>
 
     
