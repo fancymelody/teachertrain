@@ -51,12 +51,10 @@
 
 <script>
     import pagination from "../utils/pagination.vue";
-    import videoplay from './videoplay.vue';
     export default {
         name: 'videostudying',
         components: {
             pagination,
-            videoplay,
         },
         data() {
             return {
@@ -68,41 +66,7 @@
                         progressvalue: 82.4,
                         imgSrc: this.$store.state.url + 'teachertrain/video/flutter.jpg',
                         name: "flutter",
-                        content: [
-                            { t1: "第一章", t2: "课程介绍", },
-                            {
-                                t1: "1.1",
-                                t2: "Flutter介绍和主流框架对比",
-                                time: "00:07:44",
-                                video_url: this.$store.state.src
-                            },
-                            {
-                                t1: "1.2",
-                                t2: "Flutter超高性能",
-                                time: "06分44秒",
-                                video_url: this.$store.state.src
-                            },
-                            { t1: "第二章", t2: "Flutter开发环境" },
-                            {
-                                t1: "2.1",
-                                t2: "Flutter环境安装",
-                                time: "13分05秒",
-                                video_url: this.$store.state.src
-                            },
-                            {
-                                t1: "2.2",
-                                t2: "AVD虚拟机的建立",
-                                time: "08分35秒",
-                                video_url: this.$store.state.src
-                            },
-                            {
-                                t1: "2.1",
-                                t2: "教写HelloWorld程序",
-                                time: "12分45秒",
-                                video_url: this.$store.state.src
-                            },
-
-                        ],
+                        content: this.$store.state.Vue
                     },
                     {
                         progressvalue: 82.4,

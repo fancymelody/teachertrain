@@ -19,13 +19,13 @@ export const store =new Vuex.Store({
                 chapter: "1.1",
                 name: "主流框架对比",
                 time: "07分44秒",
-                view: "已观看",
+                view: "/",
             },
             {
                 chapter: "1.2",
                 name: "Flutter超高性能",
                 time: "06分44秒",
-                view: "已观看",
+                view: "/",
             },
             {
                 chapter: "第二章",
@@ -37,19 +37,19 @@ export const store =new Vuex.Store({
                 chapter: "2.1",
                 name: "Flutter环境安装",
                 time: "13分05秒",
-                view: "已观看",
+                view: "/",
             },
             {
                 chapter: "2.2",
                 name: "AVD虚拟机的建立",
                 time: "08分35秒",
-                view: "已观看",
+                view: "/",
             },
             {
                 chapter: "2.3",
                 name: "教写HelloWorld程序",
                 time: "12分45秒",
-                view: "已观看",
+                view: "/",
             },
             {
                 chapter: "第三章",
@@ -96,8 +96,17 @@ export const store =new Vuex.Store({
         ],
     },
     mutations:{
+        setView(state,index){
+            state.Vue[index].view="已观看",
+            console.log('保存',index+state.Vue[index].view)
+        }
     },
-    getters:{},
+    getters:{
+        getView(state){
+            console.log('获取',index+state.Vue[index].view)
+            return state.Vue
+        }
+    },
     actions:{},
 })
 

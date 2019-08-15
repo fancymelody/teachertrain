@@ -15,8 +15,7 @@
             :src = 'videosrc'
             style="width: 75%; margin-left: 10%"
             @pause='handle()'
-            @ended='handleEnded()'
-            
+            @ended='handleEnded(item)'       
           >
           </Media>
           </div>
@@ -26,7 +25,7 @@
                   <button @click="next">下一节</button> -->
               </div>
               <div class="right">
-                  <router-link v-for="(item) in right" :to="{path:item.path}" :key="item.id" tag="button">{{item.name}}</router-link>
+                  <router-link v-for="item in right" :to="{path:item.path}" :key="item.id" tag="button">{{item.name}}</router-link>
               </div>
           </div>
       </div>
@@ -43,13 +42,13 @@
                   <span>目录</span>
               </div>
           </div>
-          <div class="list" style="position:absolute; height:400px; overflow-y:auto">
+          <div class="list" style="position:absolute; height:600px; overflow-y:auto">
               <ul>
                 <li v-for="(item,index) in list" @click="handleClick(item,index)" :class="activeClass==index?'active':''">
-                      <span class="title1 t1" :title="item.t1"><b>{{item.t1}}</b></span>
-                          <span class="time_icon" :title="name" :style=time_icon v-if="item.time"></span>
+                      <span class="title1 t1" :title="item.chapter"><b>{{item.chapter}}</b></span>
+                          <span class="time_icon" :title="name" :style=item.time_icon v-if="item.time"></span>
                           <span v-else="" style="width: 16px;height:16px">&nbsp</span>
-                      <span class="title2 t2" :title="item.t2">{{item.t2}}</span>
+                      <span class="title2 t2" :title="item.name">{{item.name}}</span>
                       <span class="time" :title="name">{{item.time}}</span>
                 </li>
               </ul>
@@ -65,6 +64,7 @@
       components: {
         Media
       },
+
       data() {
           return {
               t1: "",
@@ -103,15 +103,19 @@
               this.title=this.$route.title
           },
           handleClick(item,index){
-              this.t1= item.t1;
-              this.t2 = item.t2;
+              this.t1= item.chapter;
+              this.t2 = item.name;
               this.activeClass=index;
               if(item.video_url){
                 this.videosrc=item.video_url;
               }
               else{
                   this.videosrc=this.list[index+1].video_url;
-                }                        
+                }
+            if(handleEnded()) {
+                this.time_icon=this.sus_icon;
+                this.$store.commit('setView',index)
+            }                     
             },
           handle() {
                 console.log('Video paused!, playing in 2 sec...')
@@ -119,9 +123,8 @@
                 this.$refs.coursevideo.play() 
                 }, 2000)
             },
-           handleEnded(icon){
-               console.log("观看已完成");
-               this.time_icon=this.sus_icon
+           handleEnded(){
+               console.log("观看已完成");                      
            }
         },
 
@@ -145,7 +148,7 @@
 
   @media screen {
       .catalog {
-          max-width: 22%;
+          max-width: 23%;
       }
 
       .video {
@@ -181,7 +184,7 @@
       width: auto;
       height: 25px;
       display: inline-block;
-      color: #FFF;   
+      color: 	#FFFAFA;   
       
   }
 
@@ -212,7 +215,7 @@
 
   button {
       background: #000;
-      color: #FFF;
+      color:	#EEE9E9;
       margin-left: 20px;
       width: 100px;
       height: 30px;
@@ -226,7 +229,7 @@
   }
 
   .catalog {
-    float: right;
+      float: right;
       background: #FFF;
       margin-right: 0px;
       height: 99%;
@@ -286,6 +289,10 @@
   .list {
       margin-top: 25px;
       width: 100%;
+
+  }
+  .list::-webkit-scrollbar{
+      width: 2px;
   }
 
   ul {
