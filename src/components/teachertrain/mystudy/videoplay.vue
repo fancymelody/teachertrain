@@ -46,7 +46,7 @@
               <ul>
                 <li v-for="(item,index) in list" @click="handleClick(item,index)" :class="activeClass==index?'active':''">
                       <span class="title1 t1" :title="item.chapter"><b>{{item.chapter}}</b></span>
-                          <span class="time_icon" :title="name" :style=item.time_icon v-if="item.time"></span>
+                          <span class="time_icon" :title="name" :style=time_icon v-if="item.time"></span>
                           <span v-else="" style="width: 16px;height:16px">&nbsp</span>
                       <span class="title2 t2" :title="item.name">{{item.name}}</span>
                       <span class="time" :title="name">{{item.time}}</span>
@@ -67,6 +67,7 @@
 
       data() {
           return {
+              end:false,
               t1: "",
               t2:"",
               ...mapState({
@@ -112,8 +113,9 @@
               else{
                   this.videosrc=this.list[index+1].video_url;
                 }
-            if(handleEnded()) {
-                this.time_icon=this.sus_icon;
+
+            if(this.end==true) {
+                this.time_icon=this.right_icon;
                 this.$store.commit('setView',index)
             }                     
             },
@@ -124,6 +126,7 @@
                 }, 2000)
             },
            handleEnded(){
+               return end=true
                console.log("观看已完成");                      
            }
         },
