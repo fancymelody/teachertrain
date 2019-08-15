@@ -23,7 +23,11 @@
                             <img :src="item.headimage" class="headimage">
                         </div>
                         <div class="infobox">
-                            <div class="personname">{{item.name}}</div>
+                            <div class="personname">
+                                {{item.name}}
+                                <!-- <span style="float: right;color:#808080;">删除</span> -->
+                                <img :src="img_del" style="width: 24px;float: right;" @click="delMsg(index)">
+                            </div>
                             <div class="time">于{{item.time}}发布</div>
                             <div class="msgcontent">{{item.msg}}</div>
                             <div class="picbox">
@@ -69,7 +73,8 @@
                         </div>
                         <!-- 显示评论框 -->
                         <div class="commentmsgbox">
-                            <div class="commentmsgboxitem" v-for="comment_item in item.comment_list">
+                            <div class="commentmsgboxitem" v-for="(comment_item,comment_index) in item.comment_list"
+                                :key="comment_index">
                                 <div class="commentmsg_box">
                                     <div class="commentheadimagebox">
                                         <img :src="comment_item.comment_headimage" class="commentheadimage">
@@ -79,6 +84,8 @@
                                         {{comment_item.comment}}
                                         <br>
                                         <span style="float:right;color: #8a8a8a;">{{comment_item.time}}</span>
+                                        <span style="float:right;margin-right:20px;"
+                                            @click="delComment(index,comment_index)">删除</span>
                                         <br>
                                     </div>
                                 </div>
@@ -90,7 +97,18 @@
         </div>
         <div class="right">
             <div class="recommend">
-
+                <!-- <div class="wordbox" style="border-bottom:1px solid #b6b5b5;">
+                    <h3 style="font-weight: bold;">推荐的人</h3>
+                </div>
+                <div class="recommenditem">
+                    
+                </div>
+                <div class="recommenditem">
+                    jjjjjjjjjjjjjjj
+                </div>
+                <div class="recommenditem">
+                    kkkkkkkkkk
+                </div> -->
             </div>
         </div>
     </div>
@@ -111,6 +129,7 @@
                 img_dislike: this.$store.state.url + 'teachertrain/community/like.png',
                 img_like: this.$store.state.url + 'teachertrain/community/likeafter.png',
                 img_comment: this.$store.state.url + 'teachertrain/community/comment.png',
+                img_del: this.$store.state.url + 'teachertrain/community/delete.png',
 
                 msgs: [
                     {
@@ -229,9 +248,9 @@
                 'quote', // 引用
                 'emoticon', // 表情
                 'image', // 插入图片
-                'table', // 表格
-                'video', // 插入视频
-                'code', // 插入代码
+                // 'table', // 表格
+                // 'video', // 插入视频
+                // 'code', // 插入代码
                 'undo', // 撤销
                 'redo' // 重复
             ],
@@ -290,18 +309,17 @@
             },
             //评论发布
             commentSubmit(index) {
-                console.log(index)
-                console.log(this.commentInput)
+                // console.log(index)
+                // console.log(this.commentInput)
                 var newMessage = {}
                 newMessage.comment = this.commentInput
                 newMessage.comment_name = "老王"
                 newMessage.time = this.getAllDateTime(new Date())
 
                 if (this.msgs[index].comment_list.length === 0) {
-                    //this.msgs[index].comment_list.push(newMessage)
+                    this.msgs[index].comment_list.push(newMessage)
                     //this.msgs[index].comment_list.splice(0,0,newMessage);
-                    this.msgs[index].comment_list.splice(newMessage);
-                    console.log("splice")
+                    console.log("push")
                 } else if (this.msgs[index].comment_list.length > 0) {
                     console.log("unshift")
                     this.msgs[index].comment_list.unshift(newMessage)
@@ -333,8 +351,48 @@
                 }
             },
             //转发
-            share(index){
-                
+            share(index) {
+                if (confirm("你确定转发吗？")) {
+                    // alert("点击了确定");
+                    var msgShare = this.msgs[index].msg
+                    console.log(msgShare)
+                    var newMessage = {}
+                    newMessage.id = this.msgs.length + 1
+                    newMessage.msg = '转发:' + msgShare
+                    newMessage.name = "老王"
+                    newMessage.comment_flag = false//评论下拉框默认关闭
+                    newMessage.comment_list = []
+                    newMessage.likes = 0   //点赞数
+                    newMessage.like_flag = false //默认点赞
+                    console.log(this.getAllDateTime(new Date()))
+                    newMessage.time = this.getAllDateTime(new Date())
+                    this.msgs.unshift(newMessage)
+                }
+                else {
+                    alert("点击了取消");
+                }
+            },
+            //删除信息
+            delMsg(index) {
+                if (confirm("你确定删除吗？")) {
+                    // alert("点击了确定");
+                    this.msgs.splice(index, 1)
+                }
+                else {
+                    alert("点击了取消");
+                }
+            },
+            //删除评论
+            delComment(index, comment_index) {
+                console.log("消息下标----" + index)
+                console.log("评论下标----" + comment_index)
+                if (confirm("你确定删除这条评论吗？")) {
+                    // alert("点击了确定");
+                    this.msgs[index].comment_list.splice(comment_index, 1)
+                }
+                else {
+                    alert("点击了取消");
+                }
             }
         }
     }
@@ -457,10 +515,6 @@
         margin-bottom: 10px;
     }
 
-    .recommend {
-        color: red;
-    }
-
     .likebox {
         width: 100%;
         display: flex;
@@ -544,8 +598,6 @@
 
     .commentmsg_box {
         width: 100%;
-        /* display: flex;
-        flex-direction: column; */
     }
 
     .commentheadimagebox {
@@ -563,4 +615,10 @@
         font-size: 16px;
         border-bottom: 1px solid #ada5a5;
     }
+
+    .recommenditem {
+        border-bottom: 1px solid #b6b5b5;
+    }
+
+
 </style>
