@@ -131,26 +131,14 @@
                         alert("时间超时");
 
                          //this.$router.push('/result');
-                        window.location.href="#/result"
-                        // this.$options.methods.gotoResult();
+                        //  window.location.href="#/result"
+                        window.location.href="/result"
 
                     } else {
                         _this.seconds -= 1
                     }
                 }, 1000)
             },
-            gotoResult() {
-                this.$router.push('/result');
-            }
-            // isFinish() {
-            //     if (minutes == 0 && seconds == 0) {
-            //         console.log("时间超时");
-            //             //弹出一个对话框
-            //             alert("时间超时");
-            //         }
-            //         this.$router.push('/result');
-            //     }
-            // }
         },
         mounted() {
             this.timer()
