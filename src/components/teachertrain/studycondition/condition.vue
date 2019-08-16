@@ -21,6 +21,7 @@
 </template>
 <script>
     import situation from "../utils/situation.vue";
+    import {mapGetters} from 'vuex'
     export default {
         components: {
             situation
@@ -39,6 +40,7 @@
                 ]
             }
         },
+        
 
     }
 </script>

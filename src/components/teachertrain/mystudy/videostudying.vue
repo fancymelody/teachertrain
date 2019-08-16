@@ -39,7 +39,7 @@
                                 <span>{{item.name}}</span>
                             </div>
                             <button class="btn"><span>我要做作业</span></button>
-                            <router-link class="btn" :to="{path:'/videoplay',query:{title: item.name,image: item.imgSrc,contents:JSON.stringify(item.content)},}" tag="button"><span>开始学习</span></router-link>
+                            <router-link class="btn" :to="{path:'/videoplay',query:{id:item.id,title: item.name,image: item.imgSrc,contents:JSON.stringify(item.content)},}" tag="button"><span>开始学习</span></router-link>
                         </div>
                     </div>
                 </div>
@@ -61,35 +61,36 @@
                 limit: 3,
                 studingList: [],
                 studingData: [],
-                classes: [
-                    {
-                        progressvalue: this.$store.getters.getProgressvalue,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/flutter.jpg',
-                        name: "flutter",
-                        content: this.$store.state.Vue
-                    },
-                    {
-                        progressvalue: this.$store.getters.getProgressvalue,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        // imgSrc:this.$store.state.url + 'teachertrain/sidebar/headsculpture.jpg',
-                        name: "人文科技艺术专题",
-                    },
-                    {
-                        progressvalue: 82.4,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        name: "人文科技艺术专题",
-                    },
-                    {
-                        progressvalue: 82.4,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        name: "人文科技艺术专题",
-                    },
-                    {
-                        progressvalue: 82.4,
-                        imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
-                        name: "人文科技艺术专题",
-                    }
-                ],
+                classes:this.$store.getters.getContent
+                // classes: [
+                //     {
+                //         progressvalue: this.$store.getters.getProgressvalue,
+                //         imgSrc: this.$store.state.url + 'teachertrain/video/flutter.jpg',
+                //         name: "flutter",
+                //         content: this.$store.state.Vue
+                //     },
+                //     {
+                //         progressvalue: this.$store.getters.getProgressvalue,
+                //         imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
+                //         // imgSrc:this.$store.state.url + 'teachertrain/sidebar/headsculpture.jpg',
+                //         name: "人文科技艺术专题",
+                //     },
+                //     {
+                //         progressvalue: 82.4,
+                //         imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
+                //         name: "人文科技艺术专题",
+                //     },
+                //     {
+                //         progressvalue: 82.4,
+                //         imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
+                //         name: "人文科技艺术专题",
+                //     },
+                //     {
+                //         progressvalue: 82.4,
+                //         imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
+                //         name: "人文科技艺术专题",
+                //     }
+                // ],
             }
         },
         mounted() {

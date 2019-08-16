@@ -122,7 +122,7 @@
            handleEnded(){
             console.log("观看已完成");
             this.list[this.end].view=this.right_icon;
-            this.$store.commit('setView',this.end)
+            this.$store.commit('setView',{id:this.$route.query.id,index:this.end})
                                      
            }
         },
