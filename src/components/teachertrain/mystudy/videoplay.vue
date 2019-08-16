@@ -46,7 +46,7 @@
               <ul>
                 <li v-for="(item,index) in list" @click="handleClick(item,index)" :class="activeClass==index?'active':''">
                       <span class="title1 t1" :title="item.chapter"><b>{{item.chapter}}</b></span>
-                          <span class="time_icon" :title="name" :style=item.view v-if="item.time"></span>
+                          <img class="time_icon" :title="name" :src=item.view v-if="item.time"></img>
                           <span v-else="" style="width: 16px;height:16px">&nbsp</span>
                       <span class="title2 t2" :title="item.name">{{item.name}}</span>
                       <span class="time" :title="name">{{item.time}}</span>
@@ -77,30 +77,25 @@
                   {name:"作业考试",path:'/teachertrain/homeworkwriting'},
                   {name:"学习情况",path:'/teachertrain/condition'},
               ],
-              time_icon: {
-                  background: "url(" + require("../../../../static/images/teachertrain/video/img_all.png") + ") no-repeat scroll -139px -127px transparent",
-              },
-              right_icon: {
-                  background: "url(" + require("../../../../static/images/teachertrain/video/right_icon.png") + ")",
-              },
+              time_icon:"../../../../static/images/teachertrain/video/play_icon.png",
+              right_icon:"../../../../static/images/teachertrain/video/right_icon.png",
               name: "点击播放",
 
           }
 
       },
-      created(){
+      mounted(){
         console.log(this.$route.query.title);
           console.log(JSON.parse(this.$route.query.contents));
           this.list=JSON.parse(this.$route.query.contents)
           for(var i=0;i<this.list.length;i++){
-              this.list[i].view=this.time_icon
+              if(this.list[i].view=='/'){
+                this.list[i].view=this.time_icon
+              }
           }
           
       },
       methods: {
-          getRouterData(){
-              this.title=this.$route.title
-          },
           handleClick(item,index){
               this.end=index,
               this.t1= item.chapter;
@@ -194,13 +189,7 @@
       
       
   }
-  /* Media{
-      margin-left: 12%;
-      width: 75%;
-      padding-top:2px;
-      border:solid;
-      border-color: #FFF;
-  } */
+
 
   .bottom {
       height: 10%;

@@ -35,7 +35,7 @@
                     },
                     {
                         name: "Flutter",
-                        content: []
+                        content: this.$store.getters.getView
                     }
                 ]
             }
