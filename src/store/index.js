@@ -21,6 +21,35 @@ export const store =new Vuex.Store({
                         name: "课程介绍",
                         score: "是",
                         test: "200/200",
+                        quizScore: 10,
+                        minutes: 15, //分钟timer
+                        seconds: 0,  //分钟秒
+                        deadline:'2018-06-11 23:59:59',
+                        title:"第一章小测验",
+                        select_flag: false,//下拉框默认关闭
+                        quiz: [
+                            {
+                                quizId: 1,
+                                subject: 'E-R图是数据库设计的工具之一，它适用于建立数据库的().',
+                                items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
+                                answer: 'D',//正确答案
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 2,
+                                subject: '最长的河？',
+                                items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
+                                answer: 'A',
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 3,
+                                subject: '市值最高的公司？',
+                                items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
+                                answer: 'D',
+                                ans: ''//选的答案
+                            }
+                        ],
                     },
                     {
                         chapter: "1.1",
@@ -41,7 +70,35 @@ export const store =new Vuex.Store({
                         name: "Flutter开发环境",
                         score: "是",
                         test: "150/200",
-                        
+                        quizScore: 10,
+                        minutes: 15, //分钟timer
+                        seconds: 0,  //分钟秒
+                        deadline:'2018-06-11 23:59:59',
+                        title:"第二章小测验",
+                        select_flag: false,//下拉框默认关闭
+                        quiz: [
+                            {
+                                quizId: 1,
+                                subject: '哒哒哒哒哒哒多多多',
+                                items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
+                                answer: 'D',//正确答案
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 2,
+                                subject: '最长的河？',
+                                items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
+                                answer: 'A',
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 3,
+                                subject: '市值最高的公司？',
+                                items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
+                                answer: 'D',
+                                ans: ''//选的答案
+                            }
+                        ],
                     },
                     {
                         chapter: "2.1",
@@ -66,7 +123,36 @@ export const store =new Vuex.Store({
                         chapter: "第三章",
                         name: "Flutter常用组件",
                         score: "/",
-                        test: "/"
+                        test: "/",
+                        quizScore:10,
+                        minutes: 15, //分钟timer
+                        seconds: 0,  //分钟秒
+                        deadline:'2018-06-11 23:59:59',
+                        title:"第三章小测验",
+                        select_flag: false,//下拉框默认关闭
+                        quiz: [
+                            {
+                                quizId: 1,
+                                subject: '地对地导弹.',
+                                items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
+                                answer: 'D',//正确答案
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 2,
+                                subject: '最长的河？',
+                                items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
+                                answer: 'A',
+                                ans: ''//选的答案
+                            },
+                            {
+                                quizId: 3,
+                                subject: '市值最高的公司？',
+                                items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
+                                answer: 'D',
+                                ans: ''//选的答案
+                            }
+                        ],
                     },
                     {
                         chapter: "3.1",

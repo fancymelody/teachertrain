@@ -52,6 +52,7 @@
         name: 'Homework',
         data() {
             return {
+                timerCountdown: null, //定时器
                 quiz: [
                     {
                         quizId: 1,
@@ -118,21 +119,21 @@
             },
             timer() {
                 var _this = this
-                var time = window.setInterval(function () {
+                this.timerCountdown = window.setInterval(function () {
                     if (_this.seconds === 0 && _this.minutes !== 0) {
                         _this.seconds = 59
                         _this.minutes -= 1
                     } else if (_this.minutes === 0 && _this.seconds === 0) {
                         _this.seconds = 0
-                        window.clearInterval(time)
+                        window.clearInterval(this.timerCountdown)
 
                         console.log("时间超时");
                         //弹出一个对话框
                         alert("时间超时");
 
-                         //this.$router.push('/result');
+                        //this.$router.push('/result');
                         //  window.location.href="#/result"
-                        window.location.href="/result"
+                        window.location.href = "/result"
 
                     } else {
                         _this.seconds -= 1
@@ -155,7 +156,15 @@
                     this.num(newVal)
                 }
             }
-        }
+        },
+        beforeDestroy() {
+            clearInterval(this.timerCountdown)
+            this.timerCountdown = null
+        },
+        // destroyed() {
+        //     clearInterval(this.this.timerCountdown)
+        //     this.timerCountdown = null
+        // }
     }
 </script>
 

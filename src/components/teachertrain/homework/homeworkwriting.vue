@@ -74,6 +74,8 @@
                 img_upper: this.$store.state.url + 'teachertrain/homework/uppertri.png',
                 img_lower: this.$store.state.url + 'teachertrain/homework/lowertri.png',
 
+                homeworklist:this.$store.getters.getContent,
+
                 homework: [
                     {
                         chapternum: "一",
