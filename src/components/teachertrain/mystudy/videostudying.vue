@@ -63,13 +63,13 @@
                 studingData: [],
                 classes: [
                     {
-                        progressvalue: 82.4,
+                        progressvalue: this.$store.getters.getProgressvalue,
                         imgSrc: this.$store.state.url + 'teachertrain/video/flutter.jpg',
                         name: "flutter",
                         content: this.$store.state.Vue
                     },
                     {
-                        progressvalue: 82.4,
+                        progressvalue: this.$store.getters.getProgressvalue,
                         imgSrc: this.$store.state.url + 'teachertrain/video/class.jpg',
                         // imgSrc:this.$store.state.url + 'teachertrain/sidebar/headsculpture.jpg',
                         name: "人文科技艺术专题",

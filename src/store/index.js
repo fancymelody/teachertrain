@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { stat } from 'fs';
 
 Vue.use(Vuex);
 
 
 export const store =new Vuex.Store({
     state:{
+        count:0,
         url:'../../../static/images/',
         Vue:[
             {
@@ -26,7 +28,7 @@ export const store =new Vuex.Store({
                 name: "Flutter超高性能",
                 time: "06分44秒",
                 view: "/",
-                src:"../../../static/images/teachertrain/video/shudu.mp4",
+                src:"../../../static/images/teachertrain/video/Origen.mp3",
             },
             {
                 chapter: "第二章",
@@ -101,13 +103,18 @@ export const store =new Vuex.Store({
     mutations:{
         setView(state,index){
             state.Vue[index].view="../../../static/images/teachertrain/video/right_icon.png",
-            console.log('保存',index+state.Vue[index].view)
+            state.count++;
+            console.log('保存',state.count+state.Vue[index].view)
         }
     },
     getters:{
         getView(state){
             console.log('获取',state.Vue)
             return state.Vue
+        },
+        getProgressvalue(state){
+            var value=state.count/(state.Vue.length+1)*100
+            return value.toFixed(1)
         }
     },
     actions:{},
