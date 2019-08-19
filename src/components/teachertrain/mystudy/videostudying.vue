@@ -38,7 +38,7 @@
                             <div class="classname">
                                 <span>{{item.name}}</span>
                             </div>
-                            <button class="btn"><span>我要做作业</span></button>
+                            <router-link class="btn" :to="{path:'/teachertrain/homeworkwriting',query:{id:item.id,title: item.name,image: item.imgSrc,contents:JSON.stringify(item.content)},}" tag="button"><span>我要做作业</span></router-link>
                             <router-link class="btn" :to="{path:'/videoplay',query:{id:item.id,title: item.name,image: item.imgSrc,contents:JSON.stringify(item.content)},}" tag="button"><span>开始学习</span></router-link>
                         </div>
                     </div>

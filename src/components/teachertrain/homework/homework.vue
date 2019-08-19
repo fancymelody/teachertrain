@@ -31,12 +31,6 @@
                         </span>
                     </label>
                 </div>
-                <!-- <div class="options" v-for="(item,index) in quiz[quizProgress].items">
-            <label class="radiolabel" id="dark">
-              <input class="radio" type="radio" name="radio" v-model="ans" v-bind:value="itemsValue[index]">
-              <span class="txt">{{itemsValue[index]}}&nbsp;&nbsp;{{item}}</span>
-            </label>
-          </div> -->
                 <!-- 按钮 -->
                 <div class="btnbox">
                     <button class="btn" @click="preview()"><span>上一题</span></button>
@@ -161,10 +155,6 @@
             clearInterval(this.timerCountdown)
             this.timerCountdown = null
         },
-        // destroyed() {
-        //     clearInterval(this.this.timerCountdown)
-        //     this.timerCountdown = null
-        // }
     }
 </script>
 

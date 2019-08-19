@@ -55,7 +55,7 @@
                 <pagination :num="writingData.length" :limit="limit" @getNew="getNew"></pagination>
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -63,18 +63,19 @@
     import pagination from "../utils/pagination.vue";
     export default {
         name: 'homeworkwriting',
-        components:{
-                pagination
-            },
+        components: {
+            pagination
+        },
         data() {
             return {
-                    limit:6,
-                    writingList:[],
-                    writingData:[],
+                limit: 6,
+                writingList: [],
+                writingData: [],
                 img_upper: this.$store.state.url + 'teachertrain/homework/uppertri.png',
                 img_lower: this.$store.state.url + 'teachertrain/homework/lowertri.png',
 
-                homeworklist:this.$store.getters.getContent,
+                // homeworklist:this.$store.getters.getContent,
+                //homework_item:[],
 
                 homework: [
                     {
@@ -137,9 +138,14 @@
             }
         },
         mounted() {
-                    this.writingData = this.homework;
-                    this.getNew(0);
-                },
+            this.writingData = this.homework;
+            this.getNew(0);
+
+            console.log(this.$route.query.title);
+            console.log(JSON.parse(this.$route.query.contents));
+            this.list = JSON.parse(this.$route.query.contents)
+
+        },
         methods: {
             dropdown(index) {
                 this.homework[index].select_flag = !this.homework[index].select_flag;
@@ -149,8 +155,15 @@
                 this.$router.push('/homework');
             },
             getNew(value) {
-                    this.writingList = this.writingData.slice(value, value + this.limit);
-                },
+                this.writingList = this.writingData.slice(value, value + this.limit);
+            },
+        },
+        created() {
+            // var homeworklist = this.$store.getters.getContent;
+            // console.log("homeworkcreated")
+            // console.log(homeworklist)
+            // var homework_item = homeworklist[0].content;
+            // console.log(homework_item)
         }
     }
 
