@@ -1,5 +1,11 @@
 <template>
     <div class="Homework">
+        <div class="navcontainer">
+            <span class="homeworknav" :style="{'background':n==quizProgress?'#08f1a4':'#aebbb2'}" v-for="n in quiz.length">
+                <span class="homeworknav_txt">
+                    {{n}}</span>
+            </span>
+        </div>
         <div class="container">
             <!--时间倒计时-->
             <div class="timecountdown">
@@ -160,6 +166,30 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .navcontainer {
+        width: 80%;
+        margin: 0px auto;
+        border: 1px solid #000;
+        border: 1px solid #08f1a4;
+    }
+
+    .homeworknav {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 3px ;
+    }
+
+    .homeworknav_txt {
+        display: block;
+        color: #FFFFFF;
+        height: 40px;
+        line-height: 40px;
+        text-align: center
+    }
+
     .container {
         width: 80%;
         margin: 10px auto;
