@@ -1,7 +1,8 @@
 <template>
     <div class="Homework">
         <div class="navcontainer">
-            <span class="homeworknav" :style="{'background':n==quizProgress?'#08f1a4':'#aebbb2'}" v-for="n in quiz.length">
+            <span class="homeworknav" :style="{'background':n-1==quizProgress?'#08f1a4':'#aebbb2'}"
+                v-for="n in quiz.length" @click="gotoSubject(n)">
                 <span class="homeworknav_txt">
                     {{n}}</span>
             </span>
@@ -14,7 +15,7 @@
             <!-- 进度条 -->
             <div class="progress">
                 <div class="progress-bar bg-success" role="progressbar"
-                    v-bind:style="{width:((quizProgress)*100/quiz.length)+'%'}" aria-valuenow="25" aria-valuemin="0"
+                    v-bind:style="{width:((quizProgress+1)*100/quiz.length)+'%'}" aria-valuenow="25" aria-valuemin="0"
                     aria-valuemax="100">
                     进行中
                 </div>
@@ -59,18 +60,21 @@
                         subject: 'E-R图是数据库设计的工具之一，它适用于建立数据库的().',
                         items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
                         answer: 'D',
+                        pickAnswer: '',
                     },
                     {
                         quizId: 2,
                         subject: '最长的河？',
                         items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
                         answer: 'A',
+                        pickAnswer: '',
                     },
                     {
                         quizId: 3,
                         subject: '市值最高的公司？',
                         items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
                         answer: 'D',
+                        pickAnswer: '',
                     }
                 ],
                 //完成的题
@@ -97,6 +101,10 @@
                 console.log(this.quiz.length)
 
                 if (this.quizProgress < this.quiz.length - 1) {
+                    console.log("选择的答案")
+                    console.log(this.quizProgress)
+                    this.quiz[this.quizProgress].pickAnswer = this.ans
+                    console.log(this.quiz[this.quizProgress].pickAnswer)
                     this.answers.set(this.quizProgress, this.ans);
                     this.quizProgress++;
                     console.log(this.answers);
@@ -105,6 +113,11 @@
                     console.log("结束");
                     if (confirm("你确定提交吗？")) {
                         // alert("点击了确定");
+                        console.log("选择的答案")
+                        console.log(this.quizProgress)
+                        this.quiz[this.quizProgress].pickAnswer = this.ans
+                        console.log(this.quiz[this.quizProgress].pickAnswer)
+                        this.answers.set(this.quizProgress, this.ans);
                         this.$router.push('/result');
                     }
                     else {
@@ -140,6 +153,12 @@
                     }
                 }, 1000)
             },
+            gotoSubject(n) {
+                console.log("--------n-------")
+                console.log(n)
+                this.quizProgress = n - 1
+            },
+            
         },
         mounted() {
             this.timer()
@@ -179,7 +198,7 @@
         width: 40px;
         display: inline-block;
         vertical-align: top;
-        margin: 3px ;
+        margin: 3px;
     }
 
     .homeworknav_txt {
