@@ -73,7 +73,7 @@
                 ans: '', //选择的答案
                 answers: new Map(),
                 score: 0,
-                minutes: 0,
+                minutes: 10,
                 seconds: 10,
                 // size: quiz.length,
             }
