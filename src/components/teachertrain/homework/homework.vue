@@ -54,38 +54,38 @@
         data() {
             return {
                 timerCountdown: null, //定时器
-                quiz: [
-                    {
-                        quizId: 1,
-                        subject: 'E-R图是数据库设计的工具之一，它适用于建立数据库的().',
-                        items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
-                        answer: 'D',
-                        pickAnswer: '',
-                    },
-                    {
-                        quizId: 2,
-                        subject: '最长的河？',
-                        items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
-                        answer: 'A',
-                        pickAnswer: '',
-                    },
-                    {
-                        quizId: 3,
-                        subject: '市值最高的公司？',
-                        items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
-                        answer: 'D',
-                        pickAnswer: '',
-                    }
-                ],
+                quiz:'',
+                // quiz: [
+                //     {
+                //         quizId: 1,
+                //         subject: 'E-R图是数据库设计的工具之一，它适用于建立数据库的().',
+                //         items: ['结构模型', '物理模型', '逻辑模型', '概念模型'],
+                //         answer: 'D',
+                //         pickAnswer: '',
+                //     },
+                //     {
+                //         quizId: 2,
+                //         subject: '最长的河？',
+                //         items: ['亚马逊', '尼罗河', '黄河', '莱茵河'],
+                //         answer: 'A',
+                //         pickAnswer: '',
+                //     },
+                //     {
+                //         quizId: 3,
+                //         subject: '市值最高的公司？',
+                //         items: ['中国移动', '阿里巴巴', '可口可乐', '苹果'],
+                //         answer: 'D',
+                //         pickAnswer: '',
+                //     }
+                // ],
                 //完成的题
                 quizProgress: 0,
                 itemsValue: ['A', 'B', 'C', 'D'],
                 ans: '', //选择的答案
                 answers: new Map(),
-                score: 0,
-                minutes: 10,
-                seconds: 10,
-                // size: quiz.length,
+                score:'',
+                minutes:'',
+                seconds:'',
             }
         },
         methods: {
@@ -118,7 +118,14 @@
                         this.quiz[this.quizProgress].pickAnswer = this.ans
                         console.log(this.quiz[this.quizProgress].pickAnswer)
                         this.answers.set(this.quizProgress, this.ans);
-                        this.$router.push('/result');
+                        this.calGrades()
+                        console.log(this.score)
+                        this.$router.push({
+                            path: '/result', query: {
+                                score: this.score,
+                                quiz:this.quiz,
+                            }
+                        });
                     }
                     else {
                         alert("点击了取消");
@@ -158,7 +165,15 @@
                 console.log(n)
                 this.quizProgress = n - 1
             },
-            
+            calGrades() {
+                var perSubject = 100 / this.quiz.length;
+                for (var i = 0; i < this.quiz.length; i++) {
+                    if (this.quiz[i].answer == this.quiz[i].pickAnswer) {
+                        this.score += perSubject;
+                    }
+                }
+                return this.score;
+            }
         },
         mounted() {
             this.timer()
@@ -180,6 +195,15 @@
             clearInterval(this.timerCountdown)
             this.timerCountdown = null
         },
+        created() {
+            console.log(this.$route.query.homework)
+            this.quiz=this.$route.query.homework.quiz
+            this.score=this.$route.query.homework.quizScore
+            this.minutes=this.$route.query.homework.minutes
+            this.seconds=this.$route.query.homework.seconds
+            console.log("---quiz----")
+            console.log(this.quiz)
+        }
     }
 </script>
 

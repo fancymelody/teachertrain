@@ -21,13 +21,13 @@
             <div class="homework">
                 <div class="homeworkitem" v-for="(item,index) in writingList">
                     <div class="chapter">
-                        <span>第{{item.chapternum}}章&nbsp;&nbsp;{{item.chaptername}}</span>
+                        <span>第{{item.chapternum}}章&nbsp;&nbsp;{{item.name}}</span>
                     </div>
                     <div class="detail">
                         <div class="homeworktitle" @click="dropdown(index)">
                             <img :src="item.select_flag==true?img_lower:img_upper" class="imgtri">
                             <span class="titleword">{{item.homeworktitle}}</span>
-                            <button class="btn" @click="onClick"><span>前往测验</span></button>
+                            <button class="btn" @click="onClick(index)"><span>前往测验</span></button>
                         </div>
                         <!-- <div class="infodetail" :style="{'display' : flag ? 'block' : 'none'}" v-if="flag"> -->
                         <div class="infodetail" v-if="item.select_flag">
@@ -45,7 +45,7 @@
                                     总分数
                                 </div>
                                 <div class="rightinfo">
-                                    <div class="rightnum">{{item.totalscore}}</div>
+                                    <div class="rightnum">{{item.quizScore}}</div>
                                     <div class="intro">您只有一次机会，请认真作答</div>
                                 </div>
                             </div>
@@ -73,77 +73,77 @@
                 writingData: [],
                 img_upper: this.$store.state.url + 'teachertrain/homework/uppertri.png',
                 img_lower: this.$store.state.url + 'teachertrain/homework/lowertri.png',
+                 
+                homework:this.$store.getters.getHomework
+            
 
-                // homeworklist:this.$store.getters.getContent,
-                //homework_item:[],
-
-                homework: [
-                    {
-                        chapternum: "一",
-                        chaptername: "各流派的大神和他们的故事",
-                        homeworktitle: "第一章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 8.00,
-                        select_flag: false,//下拉框默认关闭
-                    },
-                    {
-                        chapternum: "二",
-                        chaptername: "行为背后的目的",
-                        homeworktitle: "第二章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 10.00,
-                        select_flag: false,//默认关闭
-                    },
-                    {
-                        chapternum: "三",
-                        chaptername: "人的感知和思维",
-                        homeworktitle: "第三章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 10.00,
-                        select_flag: false,//默认关闭
-                    },
-                    {
-                        chapternum: "四",
-                        chaptername: "情绪体验和压力调节",
-                        homeworktitle: "第四章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 20.00,
-                        select_flag: false,//默认关闭
-                    },
-                    {
-                        chapternum: "五",
-                        chaptername: "催眠的真相",
-                        homeworktitle: "第五章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 15.00,
-                        select_flag: false,//默认关闭
-                    },
-                    {
-                        chapternum: "六",
-                        chaptername: "你到底能有多聪明",
-                        homeworktitle: "第六章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 5.00,
-                        select_flag: false,//默认关闭
-                    },
-                    {
-                        chapternum: "七",
-                        chaptername: "什么样的性格最受欢迎",
-                        homeworktitle: "第七章小测验",
-                        deadline: "2018-06-11 23:59:59",
-                        totalscore: 10.00,
-                        select_flag: false,//默认关闭
-                    },
-                ],
+                // homework: [
+                //     {
+                //         chapternum: "一",
+                //         chaptername: "各流派的大神和他们的故事",
+                //         homeworktitle: "第一章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 8.00,
+                //         select_flag: false,//下拉框默认关闭
+                //     },
+                //     {
+                //         chapternum: "二",
+                //         chaptername: "行为背后的目的",
+                //         homeworktitle: "第二章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 10.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                //     {
+                //         chapternum: "三",
+                //         chaptername: "人的感知和思维",
+                //         homeworktitle: "第三章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 10.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                //     {
+                //         chapternum: "四",
+                //         chaptername: "情绪体验和压力调节",
+                //         homeworktitle: "第四章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 20.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                //     {
+                //         chapternum: "五",
+                //         chaptername: "催眠的真相",
+                //         homeworktitle: "第五章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 15.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                //     {
+                //         chapternum: "六",
+                //         chaptername: "你到底能有多聪明",
+                //         homeworktitle: "第六章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 5.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                //     {
+                //         chapternum: "七",
+                //         chaptername: "什么样的性格最受欢迎",
+                //         homeworktitle: "第七章小测验",
+                //         deadline: "2018-06-11 23:59:59",
+                //         totalscore: 10.00,
+                //         select_flag: false,//默认关闭
+                //     },
+                // ],
             }
         },
         mounted() {
             this.writingData = this.homework;
             this.getNew(0);
 
-            console.log(this.$route.query.title);
-            console.log(JSON.parse(this.$route.query.contents));
-            this.list = JSON.parse(this.$route.query.contents)
+            // console.log(this.$route.query.title);
+            // console.log(JSON.parse(this.$route.query.contents));
+            // this.list = JSON.parse(this.$route.query.contents)
 
         },
         methods: {
@@ -151,19 +151,18 @@
                 this.homework[index].select_flag = !this.homework[index].select_flag;
             },
 
-            onClick() {
-                this.$router.push('/homework');
+            onClick(index) {
+                this.$router.push({path:'/homework',query:{homework:this.homework[index]}});
             },
+
             getNew(value) {
                 this.writingList = this.writingData.slice(value, value + this.limit);
             },
         },
         created() {
-            // var homeworklist = this.$store.getters.getContent;
-            // console.log("homeworkcreated")
-            // console.log(homeworklist)
-            // var homework_item = homeworklist[0].content;
-            // console.log(homework_item)
+            // var quizTest=this.$store.getters.getHomework
+            // console.log("-----接收到-----")
+            // console.log(quizTest)
         }
     }
 
