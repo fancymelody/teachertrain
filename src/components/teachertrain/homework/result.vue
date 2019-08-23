@@ -6,7 +6,7 @@
                 <div class="link"></div>
                 <div class="list">
                     <div class="tag" v-for="index in num" @click="checkDetails(index)"
-                        :style="{'background-color':answerList[index-1]==currentList[index-1]?'green':'red'}">{{index}}
+                        :style="{'background-color':quiz[index-1].answer==quiz[index-1].pickAnswer?'green':'red'}">{{index}}
                     </div>
                 </div>
             </div>
@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="display">
-                <span class="rights col-lg-6">正确答案:&nbsp;&nbsp;{{current}}</span>
-                <span class="wrong col-lg-6" :style="{'color':color}">您的答案：&nbsp;&nbsp;{{answer}}</span>
+                <span class="rights col-lg-6">正确答案:&nbsp;&nbsp;{{answer}}</span>
+                <span class="wrong col-lg-6" :style="{'color':color}">您的答案：&nbsp;&nbsp;{{pickAnswer}}</span>
             </div>
             <div class="analyze"></div>
         </div>
@@ -30,37 +30,53 @@
         data() {
             return {
                 content: "",
-                answer: '',
-                current: '',
-                score: "",
+                answer: '',//正确答案
+                pickAnswer: '',//所选答案
+                score:'',
                 color: '',
-                num: 3,
-                answerList: ['A', 'B', 'C'],
-                currentList: ['A', 'B', 'A'],
-                question: [
-                    {
-                        problem: "-R图是数据库设计的工具之一，它适用于建立数据库的().",
-                    },
-                    {
-                        problem: "R图是数据库设计的工具之一，它适用于建立数据库的().",
-                    },
-                    {
-                        problem: "E-R图是数据库设计的工具之一，它适用于建立数据库的().",
-                    }
-                ],
+                num:'',
+                // answerList: ['A', 'B', 'C'],
+                quiz:'',
+                // currentList: ['A', 'B', 'A'],
+                // question: [
+                //     {
+                //         problem: "-R图是数据库设计的工具之一，它适用于建立数据库的().",
+                //     },
+                //     {
+                //         problem: "R图是数据库设计的工具之一，它适用于建立数据库的().",
+                //     },
+                //     {
+                //         problem: "E-R图是数据库设计的工具之一，它适用于建立数据库的().",
+                //     }
+                // ],
 
             }
         },
         methods: {
-            checkDetails(index) {
+            // checkDetails(index) {
+            //     var i = index - 1;
+            //     if (this.question[i]) { this.content = this.question[i].problem }
+            //     else {
+            //         this.content = ""
+            //     };
+            //     this.answer = this.answerList[i];
+            //     this.current = this.currentList[i];
+            //     if (this.answerList[i] == this.currentList[i]) {
+            //         this.color = "green";
+            //     } else {
+            //         this.color = "red";
+            //     }
+
+            // }
+            checkDetails(index){
                 var i = index - 1;
-                if (this.question[i]) { this.content = this.question[i].problem }
+                if (this.quiz[i]) { this.content = this.quiz[i].subject }
                 else {
                     this.content = ""
                 };
-                this.answer = this.answerList[i];
-                this.current = this.currentList[i];
-                if (this.answerList[i] == this.currentList[i]) {
+                this.answer = this.quiz[i].answer;
+                this.pickAnswer = this.quiz[i].pickAnswer;
+                if (this.quiz[i].answer == this.quiz[i].pickAnswer) {
                     this.color = "green";
                 } else {
                     this.color = "red";
@@ -69,14 +85,11 @@
             }
         },
         created: function () {
-            var a = 0;
-            for (var i = 0; i < this.answerList.length; i++) {
-                if (this.answerList[i] == this.currentList[i]) {
-                    a++;
-                }
-            }
-            console.log(a);
-            this.score = a;
+            this.quiz=this.$route.query.quiz
+            this.score=this.$route.query.score
+            this.num=this.quiz.length
+            console.log(this.score)
+            console.log(this.quiz)
         }
     };
 </script>
